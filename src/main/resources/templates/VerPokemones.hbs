@@ -1,0 +1,23 @@
+{{#partial "titulo"}}
+Pokemones
+{{/partial}}
+
+{{#partial "contenido"}}
+<section style="text-align: center;">
+	<h1>Buscar Pokemon</h1>
+	<br>
+	<form action="/pokemones" method="POST">		
+		<select style="width: 60%; margin: 0 auto; padding: 1em; font-weight: bold; border-radius: 10px;"name="nombrePokemon" required>
+			<option value="" selected="true" disabled>Seleccione un pokemon</option>
+			{{#each pokemones}}
+			<option value="{{nombre}}">{{nombre}}</option>
+			{{/each}}
+		</select>
+		<br>
+		<br>
+		<br>
+		<input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Ver Detalles">
+	</form>
+</section>
+{{/partial}}
+{{>Layout.hbs}}

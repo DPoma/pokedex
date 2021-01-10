@@ -1,0 +1,34 @@
+{{#partial "titulo"}}
+Agregar Evolucion - Pokedex
+{{/partial}}
+
+{{#partial "contenido"}}
+<section style="text-align: center;">
+	<h1 style="font-weight: bold">AGREGAR EVOLUCION</h1>
+	<br>
+	<h2>Por favor, complete los siguientes datos.</h2>
+	<br>
+	<form action="/pokemones/{{nombrePokemon}}/agregarEvolucion" method="POST">		
+		<h3>Nombre</h3>
+		<br>
+		<input style="padding: 1em; width: 60%; border-radius: 10px;" name="nombrePokemon" type="text" value="{{nombre}}" required>
+		<br>
+		<h3>Descripcion</h3>
+		<br>
+		<input style="padding: 1em; width: 60%; border-radius: 10px;" name="descripcionPokemon" type="text" value="{{descripcion}}" required>
+		<h3>Nivel Requerido</h3>
+		<br>
+		<input style="padding: 1em; width: 60%; border-radius: 10px;" name="nivelRequeridoPokemon" type="number" min=1 max=1000 value="{{nivelRequerido}}" required>
+		<br>
+		<h3>URL Imagen (Opcional)</h3>
+		<br>
+		<input style="padding: 1em; width: 60%; border-radius: 10px;" name="imagenPokemon" type="text" value="{{imagen}}">
+		<br>
+		<br>
+		<br>
+		<input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Guardar">
+	</form>
+</section>
+{{/partial}}
+
+{{>Layout.hbs}}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{#block "titulo"}}{{/block}}</title>
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+</head>
+<body style="background-color: #ced6e0; font-family:'Montserrat', sans-serif;">
+	<div class="container">
+
+		<header style="text-align: center;">
+			<a href="/home" style="color: #FFFFFF">
+				<img src="https://camo.githubusercontent.com/1a4b11888ddf9f2b7a9353d6b69503e634e8704c/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67" alt="Logo" style="width: 40em; margin: 3em 0;">
+			</a>
+		</header>	
+
+		<section class="container-fluid">
+			{{#block "contenido"}}
+			{{/block}}
+		</section>
+		<br>
+		<br>
+		<footer class="footer" style="text-align: center;">
+			<a href="https://www.certant.com/"><img src="https://www.certant.com/img/certant_logo_footer.png"
+			style="filter: invert(100%); width: 12em; margin: 2em 0;"></a>
+		</footer>
+
+	</div>
+</body>
+</html>

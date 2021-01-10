@@ -1,0 +1,39 @@
+{{#partial "titulo"}}
+Ejemplares - Pokedex
+{{/partial}}
+
+{{#partial "contenido"}}
+<section style="text-align: center;">
+	<h1 style="font-weight: bold">POKEMONES CAPTURADOS</h1>
+	<br>
+	<br>
+	<table style="
+	width:60%; 
+	box-shadow: 0 0 10px #000;
+	background:white;
+	border-radius:6px;
+	overflow:hidden;
+	position:relative; 
+	margin: 0 auto;">
+	<tr style="
+	background:#a4b0be;">
+	<th style="padding: 1em 0; text-align: center"><h2><b>Pokemon</b></h2></th>
+	<th style="padding: 1em 0; text-align: center"><h2><b>Nivel Actual</b></h2></th>
+</tr>
+{{#each ejemplares}}
+<tr>
+	<td><h2>{{pokemon.nombre}}</h2></td>
+	<td><h2>{{nivelActual}}</h2></td>
+</tr>
+{{/each}}
+</table>
+<br>
+<br>
+<br>
+<a href="/pokemones/agregarEjemplar">
+	<input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="btn" value="Agregar Ejemplar">
+</a>
+</section>
+{{/partial}}
+
+{{>Layout.hbs}}

@@ -1,0 +1,75 @@
+		{{#partial "titulo"}}
+		Pokemones
+		{{/partial}}
+
+		{{#partial "contenido"}}
+		<section style="text-align: center;">
+			<h1>Buscar Pokemon</h1>
+			<br>
+			<form action="/pokemones" method="POST">		
+				<select style="width: 60%; margin: 0 auto; padding: 1em; font-weight: bold; border-radius: 10px;"name="nombrePokemon" required>
+					<option value="" selected="true" disabled>Seleccione un pokemon</option>
+					{{#each pokemones}}
+					<option value="{{nombre}}">{{nombre}}</option>
+					{{/each}}
+				</select>
+				<br>
+				<br>
+				<br>
+				<input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Ver Detalles">
+			</form>
+			<br>
+			<br>
+			<img style="width: 25em;" src="{{imagen}}">
+			<br>
+			<br>
+			<div style="box-shadow: 0 0 15px #000; text-align: center; border-radius: 10px; background-color: #a4b0be;">
+				<h2 style="padding-top: 40px; text-transform: uppercase;"><b>{{nombre}}</b></h2><br>
+				<h3 style="width: 80%; margin: auto;">{{descripcion}}</h3><br>
+				<h3>Nivel Requerido: {{nivel}}</h3><br>
+				<br>
+
+				<a href="/pokemones/{{nombre}}/modificarDatos"><input style="width: 30%; font-weight: bold; padding: 1em 0; border-radius: 10px; margin-bottom: 30px;" class="btn btn-primary" type="btn" value="Modificar Datos"></a>
+			</div>
+			<br>
+			<br>
+			<div style="box-shadow: 0 0 15px #000; text-align: center; border-radius: 10px; background-color: #a4b0be;">
+				<h2 style="border-bottom: 1px solid #000; padding: 15px 0;"><b>HABILIDADES</b></h2><br>
+				{{#each habilidades}}
+				<h3 style="margin: 0;"><b>{{nombre}}</b></h3><br>
+				<h3 style="border-bottom: 1px solid #000; padding-bottom: 30px; margin: 0;">{{descripcion}}</h3><br>
+				{{/each}}
+				<a href="/pokemones/{{nombre}}/agregarHabilidad"><img style="width: 5em; margin: 1em 2em;" src="https://cdn.icon-icons.com/icons2/957/PNG/128/add_icon-icons.com_74429.png"></a>
+
+				<a href="/pokemones/{{nombre}}/quitarHabilidad"><img style="width: 5em; margin: 2em;" src="https://cdn.icon-icons.com/icons2/957/PNG/128/delete_icon-icons.com_74434.png"></a>
+			</div>
+			<br>
+			<br>
+			<div style="box-shadow: 0 0 15px #000; text-align: center; border-radius: 10px; background-color: #a4b0be;">
+				<h2 style="border-bottom: 1px solid #000; padding: 15px 0;"><b>TIPOS</b></h2><br>
+				{{#each tipos}}
+				<h3 style="margin: 0;">{{nombre}}</h3><br>
+				{{/each}}
+				<a href="/pokemones/{{nombre}}/agregarTipo"><img style="width: 5em; margin: 1em 2em;" src="https://cdn.icon-icons.com/icons2/957/PNG/128/add_icon-icons.com_74429.png"></a>
+
+				<a href="/pokemones/{{nombre}}/quitarTipo"><img style="width: 5em; margin: 2em;" src="https://cdn.icon-icons.com/icons2/957/PNG/128/delete_icon-icons.com_74434.png"></a>
+			</div>
+			<br>
+			<br>
+			<div style="box-shadow: 0 0 15px #000; text-align: center; border-radius: 10px; background-color: #a4b0be;">
+				<h2 style="border-bottom: 1px solid #000; padding: 15px 0;"><b>EVOLUCIONES</b></h2><br>
+				<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+					{{#each evoluciones}}
+					<div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 0 3em;">
+						<img style="width: 10em; padding: 1em;" src="{{imagen}}">
+						<h3>{{nombre}}</h3>
+					</div>
+					{{/each}}
+				</div>
+				<br>
+				<br>
+				<a href="/pokemones/{{nombre}}/agregarEvolucion"><input style="width: 30%; font-weight: bold; padding: 1em 0; border-radius: 10px; margin-bottom: 30px;" class="btn btn-primary" type="btn" value="Agregar Evolucion"></a>
+			</div>
+		</section>
+		{{/partial}}
+		{{>Layout.hbs}}

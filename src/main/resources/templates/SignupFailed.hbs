@@ -1,0 +1,30 @@
+{{#partial "titulo"}}
+Registrarse - Pokedex
+{{/partial}}
+
+{{#partial "contenido"}}
+<section style="text-align: center;">
+    <form class="form-signin" action="/signup" method="POST">
+        <h1 style="font-weight: bold">CREA TU CUENTA</h1>
+        <div class="alert alert-danger" role="alert" style="margin: 1em auto; border-radius: 10px; width:60%;">
+            El Usuario ya existe.
+        </div>
+        <h3>Nombre</h3>
+        <br>
+        <input style="padding: 1em; width: 60%; border-radius: 10px;" type="text" name="name" required autofocus>
+        <h3>Usuario</h3>
+        <br>
+        <input style="padding: 1em; width: 60%; border-radius: 10px;" type="text" name="username" required>
+        <h3>Contrasena</h3>
+        <br>
+        <input style="padding: 1em; width: 60%; border-radius: 10px;" type="password" name="password" required>
+        <br>
+        <br>
+        <br>
+        <br>
+        <input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Registrarse">
+    </form>
+</section>
+{{/partial}}
+
+{{>PublicLayout.hbs}}

@@ -1,0 +1,27 @@
+{{#partial "titulo"}}
+Quitar Tipo - Pokedex
+{{/partial}}
+
+{{#partial "contenido"}}
+<section style="text-align: center;">
+	<h1 style="font-weight: bold">QUITAR TIPO</h1>
+	<br>
+	<h2>Por favor, seleccione un tipo para quitar.</h2>
+	<br>
+	<br>
+	<form action="/pokemones/{{nombrePokemon}}/quitarTipo" method="POST">		
+		<select  style="width: 60%; margin: 0 auto; padding: 1em; font-weight: bold; border-radius: 10px;" name="nombreTipo" required>
+			<option value="" selected="true" disabled>Seleccione un tipo</option>
+			{{#each tipos}}
+			<option value="{{nombre}}">{{nombre}}</option>
+			{{/each}}
+		</select>
+		<br>
+		<br>
+		<br>
+		<input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Guardar">
+	</form>
+</section>
+{{/partial}}
+
+{{>Layout.hbs}}
