@@ -1,5 +1,6 @@
 package com.certant.pokedex.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ import com.certant.pokedex.handlers.ListHandler;
 
 @Entity
 @DiscriminatorValue("SI")
-public class PokemonBase extends Pokemon {
+public class PokemonBase extends Pokemon implements Serializable {
 	
-	@OneToMany(mappedBy = "pokemonBase", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    private static final long serialVersionUID = 1L;
+    
+	@OneToMany(mappedBy = "pokemonBase", cascade = CascadeType.ALL)
 	private List<PokemonEvolucion> evoluciones;
 	
 	public PokemonBase() {

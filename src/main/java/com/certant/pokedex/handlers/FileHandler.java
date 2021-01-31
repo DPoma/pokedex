@@ -1,5 +1,6 @@
 package com.certant.pokedex.handlers;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -7,19 +8,23 @@ import com.certant.pokedex.model.*;
 import com.certant.pokedex.repositories.RepositorioHabilidades;
 import com.certant.pokedex.repositories.RepositorioPokemones;
 import com.certant.pokedex.repositories.RepositorioTipos;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class FileHandler {
 
-	public static void extraerDatos() {
-		leerHabilidades("./src/main/resources/data/Habilidades.csv");
-		leerTipos("./src/main/resources/data/Tipos.csv");
-		leerPokemones("./src/main/resources/data/Pokemones.csv");
-		leerHabilidadesDePokemon("./src/main/resources/data/PokemonesHabilidades.csv");
-		leerEvolucionesDePokemon("./src/main/resources/data/PokemonesEvoluciones.csv");
+	public static void extraerDatos() throws CsvValidationException {
+		leerHabilidades("./src/main/resources/static/Habilidades.csv");
+		leerTipos("./src/main/resources/static/Tipos.csv");
+		leerPokemones("./src/main/resources/static/Pokemones.csv");
+		leerHabilidadesDePokemon("./src/main/resources/static/PokemonesHabilidades.csv");
+		leerEvolucionesDePokemon("./src/main/resources/static/PokemonesEvoluciones.csv");
 	}
 	
-	public static void leerHabilidades(String path) {
+	public static void leerHabilidades(String path) throws CsvValidationException {
 		try {
 			CSVReader reader = crearReader(path);
 			String [] linea;
@@ -36,7 +41,7 @@ public class FileHandler {
 		} 
 	}
 	
-	public static void leerTipos(String path) {
+	public static void leerTipos(String path) throws CsvValidationException {
 		try {
 			CSVReader reader = crearReader(path);
 			String [] linea;
@@ -52,7 +57,7 @@ public class FileHandler {
 		} 
 	}
 	
-	public static void leerPokemones(String path) {
+	public static void leerPokemones(String path) throws CsvValidationException {
 		try {
 			CSVReader reader = crearReader(path);
 			String [] linea;
@@ -87,7 +92,7 @@ public class FileHandler {
 		}
 	}
 	
-	public static void leerEvolucionesDePokemon(String path) {	
+	public static void leerEvolucionesDePokemon(String path) throws CsvValidationException {	
 		try {
 			CSVReader reader = crearReader(path);
 			String [] linea;
@@ -109,7 +114,7 @@ public class FileHandler {
 		}
 	}
 	
-	public static void leerHabilidadesDePokemon(String path) {
+	public static void leerHabilidadesDePokemon(String path) throws CsvValidationException {
 		try {
 			CSVReader reader = crearReader(path);
 			String [] linea;
@@ -130,7 +135,9 @@ public class FileHandler {
 		}
 	}
 		
-	public static CSVReader crearReader(String path) throws IOException {
-		return new CSVReader(new FileReader(path), ';');
+	public static CSVReader crearReader(String path) throws FileNotFoundException {
+		FileReader fileReader = new FileReader(path);
+		CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
+		return new CSVReaderBuilder(fileReader).withCSVParser(csvParser).build();
 	}
 }

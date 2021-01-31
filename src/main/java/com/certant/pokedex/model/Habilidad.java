@@ -1,13 +1,15 @@
 package com.certant.pokedex.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="Habilidades")
-public class Habilidad {
-
+public class Habilidad implements Serializable {
+	
+    private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private int id;

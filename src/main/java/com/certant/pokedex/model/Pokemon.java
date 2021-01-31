@@ -1,5 +1,6 @@
 package com.certant.pokedex.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,9 @@ import com.certant.pokedex.handlers.ListHandler;
 @Table(name = "Pokemones")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="BASE", discriminatorType = DiscriminatorType.STRING)
-public class Pokemon {
+public class Pokemon implements Serializable{
 	
+    private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private int id;
@@ -25,13 +27,13 @@ public class Pokemon {
 	
 	private String imagen;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Pokemones_Tipos", 
 	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
 	inverseJoinColumns = {@JoinColumn(name = "Tipo_Id")})
 	private List<Tipo> tipos;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Pokemones_Habilidades", 
 	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
 	inverseJoinColumns = {@JoinColumn(name = "Habilidad_Id")})

@@ -1,13 +1,17 @@
 package com.certant.pokedex.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import com.certant.pokedex.handlers.ListHandler;
 
 @Entity
 @DiscriminatorValue("NO")
-public class PokemonEvolucion extends Pokemon {
+public class PokemonEvolucion extends Pokemon implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
 	@ManyToOne(cascade = CascadeType.ALL)
 	private PokemonBase pokemonBase;
 
