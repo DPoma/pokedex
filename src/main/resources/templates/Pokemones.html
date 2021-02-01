@@ -1,70 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Layout</title>
-<link rel="stylesheet" th:href="@{/css/style.css}">
+	<meta charset="ISO-8859-1">
+	<title>Pokemones - Pokedex</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-	<section class="section">
-		<h1 class="title">Buscar Pokemon</h1>
-		
-		<form action="/pokemones" method="POST">
-			<select class="select" name="nombrePokemon" required>
-				<option value="" selected="true" disabled>Seleccione un pokemon</option> 
-				<option value="{{nombre}}">{{nombre}}</option>
-			</select> 
-			<input class="button" type="submit" value="Ver Detalles">
-		</form>
-		
-		<img class="pokemon" src="{{imagen}}">
-		
-		<div class="pokemon__section">
-			<h2 class="pokemon__name">{{nombre}}</h2>
-			<h3 class="pokemon_description">{{descripcion}}</h3>
-			<h3>Nivel Requerido: {{nivel}}</h3>
-			<a href="/pokemones/{{nombre}}/modificarDatos">
-				<input class="button" type="btn" value="Modificar Datos">
-			</a>
-		</div>
-		
-		<div class="pokemon__section">
-			<h2 class="pokemon__title">HABILIDADES</h2>
-			<h3>{{nombre}}</h3>
-			<h3 class="habilidad__description">{{descripcion}}</h3>
-			<a href="/pokemones/{{nombre}}/agregarHabilidad">
-				<input class="button" type="btn" value="Agregar Habilidad">
-			</a>
-			<a href="/pokemones/{{nombre}}/quitarHabilidad">
-				<input class="button" type="btn" value="Quitar Habilidad">
-			</a>
-		</div>
-		
-		<div class="pokemon__section">
-			<h2 class="pokemon__title">TIPOS</h2>
-			<h3>{{nombre}}</h3>
-			<a href="/pokemones/{{nombre}}/agregarTipo">
-				<input class="button" type="btn" value="Quitar Habilidad">
-			</a>
-			<a href="/pokemones/{{nombre}}/quitarTipo">
-				<input class="button" type="btn" value="Quitar Habilidad">
-			</a>
-		</div>
-		
-		<div class="pokemon__section">
-			<h2 class="pokemon__title">EVOLUCIONES</h2>
-			<div class="pokemon__evolutions">
-				{{#each evoluciones}}
-				<div class="pokemon__evolution">
-					<img class="evolution__img" src="{{imagen}}">
-					<h3>{{nombre}}</h3>
-				</div>
-				{{/each}}
-			</div>
-			<a href="/pokemones/{{nombre}}/agregarEvolucion">
-				<input class="button" type="btn" value="Agregar Evolucion">
+<body class="body">
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
+	<h1 class="title">Pokemones</h1>
+	<section class="pokemones">
+		<div class="pokemones__box" th:each="pokemon : ${pokemones}">
+			<img class="pokemones__box-img" th:src="${pokemon.imagen}">
+			<h2 class="pokemones__box-name" th:text="${pokemon.nombre}"></h2>
+			<a th:href="@{/pokemones/} + ${pokemon.id}">
+				<input class="button" type="button" value="Detalles">
 			</a>
 		</div>
 	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
 </body>
 </html>

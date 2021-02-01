@@ -169,4 +169,12 @@ public class Pokemon implements Serializable{
 	public Pokemon buscarEvolucion(String nombre) {
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "Pokemon [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivelRequerido="
+				+ nivelRequerido + ", imagen=" + imagen + ", tipos=" + tipos + ", habilidades=" + habilidades + "]";
+	}
+	
+	
 }
