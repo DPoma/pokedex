@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Layout</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">	
+</head>
+<body>
+	<header class="header" th:fragment="header">
+		<a href="/">
+			<img class="header__logo" src="https://camo.githubusercontent.com/1a4b11888ddf9f2b7a9353d6b69503e634e8704c/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67" alt="Pokedex">
+		</a>
+	</header>
+		
+	<nav class="navbar" th:fragment="navbar">		
+		<ul>
+			<li><a class="navbar__item" href="/pokemones"><h3>VER POKEMONES</h3></a></li>
+			<li><a class="navbar__item" href="/pokemones/agregarPokemon"><h3>AGREGAR POKEMON</h3></a></li>
+			<li><a class="navbar__item" href="/pokemones/verEjemplar"><h3>MIS POKEMONES</h3></a></li>
+		</ul>
+	</nav>
+	
+	<form method="POST" th:action="@{/logout}" th:fragment="logout">
+		<a href="#" onclick="this.parentNode.submit();">Cerrar Sesion</a>
+	</form>
+	
+	<footer class="footer" th:fragment="footer">
+		<a href="https://www.certant.com/">
+			<img class="footer__logo" src="https://www.certant.com/img/certant_logo_footer.png" alt="Certant">
+		</a>
+	</footer>
+</body>
+</html>

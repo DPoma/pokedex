@@ -25,12 +25,6 @@ public class Controlador {
 		//List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
 		//for(Pokemon pokemon : pokemones)
 			//pokemonService.guardar(pokemon);
-		return "index";
-	}
-	
-	@GetMapping("/styles")
-	public String styles(){
-		return "index";
-	}
-	
+		return "Home";
+	}	
 }
