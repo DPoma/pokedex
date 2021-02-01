@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Login</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<section style="text-align: center;">
-  <form class="form-signin" action="/login" method="POST">
-    <h1><b>Usuario</b></h1>
-    <br>
-    <input style="padding: 1em; width: 60%; border-radius: 10px;" type="text" name="username" required autofocus>
-    <br>
-    <h1><b>Contrasena</b></h1>
-    <br>
-    <input style="padding: 1em; width: 60%; border-radius: 10px;" type="password" name="password" required>
-    <br>
-    <br>
-    <br>
-    <br>
-    <input style="width: 60%; font-weight: bold; padding: 1em 0; border-radius: 10px;" class="btn btn-primary" type="submit" value="Login">
-    <br>
-    <br>
-    <br>
-    <a href="/signup" style="color: #000; text-decoration: none;"><h2>Registrarse</h2></a>
-</form>
-</section>
+	<header th:replace="layout :: header"></header>
+	<section class="section">
+  		<form class="form-signin" action="/login" method="POST">
+    		<h1 class="title">Usuario</h1>
+    		<input class="input" type="text" name="username" required autofocus>
+    		<h1 class="title">Contrasena</h1>
+    		<input class="input" type="password" name="password" required>
+    		<input class="button" type="submit" value="Login">
+    		<a href="/"><h1>Registrarse</h1></a>
+		</form>
+	</section>
+	<footer th:replace="layout :: footer"></footer>
 </body>
 </html>

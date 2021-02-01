@@ -21,10 +21,15 @@ public class Controlador {
 	
 	@GetMapping("/")
 	public String inicio() throws CsvValidationException {
-		FileHandler.extraerDatos();
-		List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
-		for(Pokemon pokemon : pokemones)
-			pokemonService.guardar(pokemon);
+		//FileHandler.extraerDatos();
+		//List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
+		//for(Pokemon pokemon : pokemones)
+			//pokemonService.guardar(pokemon);
+		return "index";
+	}
+	
+	@GetMapping("/styles")
+	public String styles(){
 		return "index";
 	}
 	

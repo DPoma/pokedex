@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Layout</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section class="section">
+		<h1 class="title">AGREGAR TIPO</h1>
+		<h2>Por favor, seleccione un tipo para agregar.</h2>
+		<form action="/pokemones/{{nombrePokemon}}/agregarTipo" method="POST">
+			<select class="select" name="nombreTipo" required>
+				<option value="" selected="true" disabled>Seleccione un tipo</option>
+				<option value="{{nombre}}">{{nombre}}</option>
+			</select>
+			<input class="button" type="submit" value="Guardar">
+		</form>
+	</section>
+</body>
+</html>

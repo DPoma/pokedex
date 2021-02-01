@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Layout</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section class="section">
+		<h1 class="title">AGREGAR POKEMON</h1>
+		<h2>Por favor, complete los siguientes datos.</h2>
+		<form action="/pokemones/agregarPokemon" method="POST">
+			<h3>Nombre</h3>
+			<input class="input" name="nombrePokemon" type="text" value="{{nombre}}" required>
+			<h3>Descripcion</h3>
+			<input class="input" name="descripcionPokemon" type="text" value="{{descripcion}}" required>
+			<h3>Nivel Requerido</h3>
+			<input class="input" name="nivelRequeridoPokemon" type="number" min=1 max=1000 value="{{nivelRequerido}}" required> <br>
+			<h3>URL Imagen (Opcional)</h3>
+			<input class="input" name="imagenPokemon" type="text" value="{{imagen}}"> <br>
+			<input class="button" type="submit" value="Guardar">
+		</form>
+	</section>
+</body>
+</html>

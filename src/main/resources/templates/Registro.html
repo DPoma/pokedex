@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Layout</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section class="section">
+		<form class="form-signin" action="/signup" method="POST">
+			<h1 style="font-weight: bold">CREA TU CUENTA</h1>
+			<h3>Nombre</h3>
+			<input class="input" type="text" name="name" required autofocus>
+			<h3>Usuario</h3>
+			<input class="input" name="username" required>
+			<h3>Contrasena</h3>
+			<input class="input" type="password" name="password" required>
+			<input class="button" type="submit" value="Registrarse">
+		</form>
+	</section>
+</body>
+</html>
