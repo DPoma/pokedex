@@ -8,7 +8,7 @@ import com.certant.pokedex.model.*;
 
 import com.certant.pokedex.repositories.RepositorioPokemones;
 
-import com.certant.pokedex.service.PokemonService;
+import com.certant.pokedex.service.IPokemonService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 public class DataAccessObject {
 	
 	@Autowired
-	private PokemonService pokemonService;
+	private IPokemonService pokemonService;
 		
 	public void persistirDatos() {
 		List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();

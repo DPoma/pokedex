@@ -2,15 +2,41 @@ package com.certant.pokedex.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.certant.pokedex.dao.HabilidadDAO;
 import com.certant.pokedex.model.Habilidad;
 
-public interface HabilidadService {
+@Service
+public class HabilidadService implements IHabilidadService {
+
+	@Autowired
+	private HabilidadDAO habilidadDAO;
 	
-	public List<Habilidad> habilidades();
-	
-	public void guardar(Habilidad habilidad);
-	
-	public void eliminar(Habilidad habilidad);
-	
-	public Habilidad buscar(Habilidad habilidad);
+	@Override
+	@Transactional(readOnly = true)
+	public List<Habilidad> habilidades() {
+		return (List<Habilidad>)habilidadDAO.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void guardar(Habilidad habilidad) {
+		habilidadDAO.save(habilidad);
+		
+	}
+
+	@Override
+	@Transactional
+	public void eliminar(Habilidad habilidad) {
+		habilidadDAO.delete(habilidad);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Habilidad buscar(Habilidad habilidad) {
+		return habilidadDAO.findById(habilidad.getId()).orElse(null);
+	}
 }

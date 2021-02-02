@@ -148,10 +148,10 @@ public class Pokemon implements Serializable{
 		this.tipos.remove(this.buscarTipo(tipo.getNombre()));
 	}
 	
-	public void modificarDatos(String nombre, String descripcion, String nivel) {
+	public void editarDatos(String nombre, String descripcion, int nivel) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.nivelRequerido = Integer.parseInt(nivel);
+		this.nivelRequerido = nivel;
 	}
 	
 	public boolean estaDisponible() {

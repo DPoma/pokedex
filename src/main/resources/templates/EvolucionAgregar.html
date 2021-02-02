@@ -19,13 +19,13 @@
 		<h2>Por favor, complete los siguientes datos.</h2>
 		<form th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}" method="POST">		
 			<label class="title" for="nombre">Nombre</label>		
-			<input class="input" name="nombre" type="text" th:value="${evolucion.nombre}" required>
+			<input class="input" name="nombre" type="text" th:text="${evolucion.nombre}" required>
 			<label class="title" for="descripcion">Descripcion</label>		
-			<input class="input" name="descripcion" type="text" th:value="${evolucion.descripcion}" required>
+			<input class="input" name="descripcion" type="text" th:text="${evolucion.descripcion}" required>
 			<label class="title" for="nivelRequerido">Nivel Requerido</label>		
-			<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:value="${evolucion.nivelRequerido}" required>
+			<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:text="${evolucion.nivelRequerido}" required>
 			<label class="title" for="imagen">URL Imagen (Opcional)</label>
-			<input class="input" name="imagen" type="text" th:value="${evolucion.imagen}">
+			<input class="input" name="imagen" type="text" th:text="${evolucion.imagen}">
 			<input class="button" type="submit" value="Guardar">
 		</form>
 	</section>

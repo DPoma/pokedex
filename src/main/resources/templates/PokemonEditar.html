@@ -9,13 +9,13 @@
 <section class="section">
 	<h1 class="title">MODIFICAR DATOS</h1>
 	<h2>Por favor, complete los datos con los nuevos valores.</h2>
-	<form action="/pokemones/{{nombre}}/modificarDatos" method="POST">		
-		<h3>Nombre</h3>
-		<input class="input" name="nombrePokemon" type="text" value="{{nombre}}" required>
-		<h3>Descripcion</h3>
-		<input class="input" name="descripcionPokemon" type="text" value="{{descripcion}}" required>
-		<h3>Nivel Requerido</h3>
-		<input class="input" name="nivelRequeridoPokemon" type="number" min=1 max=1000 value="{{nivelRequerido}}" required>
+	<form th:object="${pokemon}" th:action="@{/pokemones/} + ${pokemon.id} + @{/editar}" method="POST">		
+		<label class="title" for="nombre" >Nombre</label>
+		<input class="input" name="nombre" type="text" th:value="${pokemon.nombre}" required>
+		<label class="title" for="descripcion" >Descripcion</label>
+		<input class="input" name="descripcion" type="text" th:value="${pokemon.descripcion}" required>
+		<label class="title" for="nivelRequerido" >Nivel Requerido</label>
+		<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:value="${pokemon.nivelRequerido}" required>
 		<input class="button" type="submit" value="Guardar Cambios">
 	</form>
 </section>

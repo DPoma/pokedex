@@ -10,23 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.certant.pokedex.model.Habilidad;
 import com.certant.pokedex.model.Pokemon;
+import com.certant.pokedex.model.PokemonBase;
+import com.certant.pokedex.model.PokemonEvolucion;
 import com.certant.pokedex.model.Tipo;
 import com.certant.pokedex.repositories.RepositorioHabilidades;
+import com.certant.pokedex.repositories.RepositorioPokemones;
 import com.certant.pokedex.repositories.RepositorioTipos;
-import com.certant.pokedex.service.HabilidadService;
-import com.certant.pokedex.service.PokemonService;
-import com.certant.pokedex.service.TipoService;
+import com.certant.pokedex.service.IEjemplarService;
+import com.certant.pokedex.service.IHabilidadService;
+import com.certant.pokedex.service.IPokemonService;
+import com.certant.pokedex.service.ITipoService;
 import com.opencsv.exceptions.CsvValidationException;
 
 @Controller
 public class Controlador {
 	
 	@Autowired
-	private PokemonService pokemonService;
+	private IPokemonService pokemonService;
 	@Autowired
-	private HabilidadService habilidadService;
+	private IHabilidadService habilidadService;
 	@Autowired
-	private TipoService tipoService;
+	private ITipoService tipoService;
+	@Autowired
+	private IEjemplarService ejemplarService;
 	
 	@GetMapping("/")
 	public String inicio() throws CsvValidationException {
@@ -48,6 +54,7 @@ public class Controlador {
 	public String pokemonGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
 		model.addAttribute("pokemon", pokemon);
+		model.addAttribute("evoluciones", RepositorioPokemones.obtenerEvolucionesOrdenadas(pokemon));
 		return "Pokemon";
 	}
 	
@@ -124,22 +131,52 @@ public class Controlador {
 	}
 	
 	@GetMapping("/pokemones/{id}/agregarEvolucion")
-	public String agregarEvolucionGet(Pokemon pokemon, Model model) {
-		pokemon = pokemonService.buscar(pokemon);
+	public String agregarEvolucionGet(Pokemon pokemon, PokemonEvolucion evolucion, Model model) {
 		model.addAttribute("pokemon", pokemon);
+		model.addAttribute("evolucion", evolucion);
 		return "EvolucionAgregar";
 	}
 	
 	@PostMapping("/pokemones/{id}/agregarEvolucion")
-	public String agregarEvolucionPost(Pokemon pokemon, Pokemon evolucion) {
+	public String agregarEvolucionPost(Pokemon pokemon, PokemonEvolucion evolucion) {
 		pokemon = pokemonService.buscar(pokemon);
-		pokemon.agregarEvolucion(evolucion);
+		pokemon.agregarEvolucion(evolucion);	
 		pokemonService.guardar(pokemon);
 		return "redirect:/pokemones/{id}";
 	}
 	
+	@GetMapping("/pokemones/agregar")
+	public String agregarPokemonGet(PokemonBase pokemon, Model model) {
+		model.addAttribute("pokemon", pokemon);
+		return "PokemonAgregar";
+	}
+	
+	@PostMapping("/pokemones/agregar")
+	public String agregarPokemonPost(PokemonBase pokemon) {
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones";
+	}
+	
 	@GetMapping("/ejemplares")
-	public String ejemplares() {
+	public String ejemplaresGet() {
 		return "Ejemplares";
+	}
+	
+	@GetMapping("/pokemones/{id}/editar")
+	public String editarGet(Pokemon pokemon, Model model) {
+		pokemon = pokemonService.buscar(pokemon);
+		model.addAttribute("pokemon", pokemon);
+		return "PokemonEditar";
+	}
+	
+	@PostMapping("/pokemones/{id}/editar")
+	public String editarPost(Pokemon pokemon) {
+		String nombre = pokemon.getNombre();
+		String descripcion = pokemon.getDescripcion();
+		int nivelRequerido = pokemon.getNivelRequerido();
+		pokemon = pokemonService.buscar(pokemon);
+		pokemon.editarDatos(nombre, descripcion, nivelRequerido);
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones/{id}";
 	}
 }

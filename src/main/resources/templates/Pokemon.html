@@ -17,7 +17,7 @@
 		<div class="pokemon__info">
 			<h2 class="pokemon__info-name" th:text="${pokemon.nombre}"></h2>
 			<h3 class="pokemon_info-desc" th:text="${pokemon.descripcion}"></h3>
-			<!--  <h3 th:text="${pokemon.nivelRequerido}"></h3>-->
+			<h3 th:text="@{Nivel Requerido: } + ${pokemon.nivelRequerido}"></h3>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/editar}">
 				<input class="button" type="button" value="Editar Datos">
 			</a>
@@ -51,7 +51,7 @@
 		<div class="pokemon__evolution">
 			<h2 class="pokemon__evolution-title">EVOLUCIONES</h2>
 			<div class="pokemon__evolution-list">
-				<div class="pokemon__evolution-list-element" th:each="evolucion : ${pokemon.evoluciones}">
+				<div class="pokemon__evolution-list-element" th:each="evolucion : ${evoluciones}">
 					<img class="pokemon__evolution-list-element-img" th:src="${evolucion.imagen}">
 					<h3 th:src="${evolucion.nombre}"></h3>
 				</div>
