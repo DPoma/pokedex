@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+	<section class="section">
+		<h1 class="title">QUITAR TIPO</h1>
+		<h2>Por favor, seleccione un tipo para quitar.</h2>
+		<form th:object="${tipo}" action="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}" method="POST">
+			<select class="select" name="id" required>
+				<option value="" selected="true" disabled>Seleccione un tipo</option>
+				<option th:each="tipoSelect : ${pokemon.tipos}" th:text=${tipoSelect.nombre} th:value="${tipoSelect.id}"></option>
+			</select>
+			<input class="button" type="submit" value="Guardar">
+		</form>
+	</section>
+</body>
+</html>

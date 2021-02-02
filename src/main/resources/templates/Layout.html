@@ -29,7 +29,9 @@
 	</nav>
 	
 	<form method="POST" th:action="@{/logout}" th:fragment="logout">
-		<a href="#" onclick="this.parentNode.submit();">Cerrar Sesion</a>
+		<a href="#" onclick="this.parentNode.submit();">
+			<input class="button" type="button" value="logout">
+		</a>
 	</form>
 	
 	<footer class="footer" th:fragment="footer">

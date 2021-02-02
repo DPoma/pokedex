@@ -18,8 +18,8 @@
 			<h2 class="pokemon__info-name" th:text="${pokemon.nombre}"></h2>
 			<h3 class="pokemon_info-desc" th:text="${pokemon.descripcion}"></h3>
 			<!--  <h3 th:text="${pokemon.nivelRequerido}"></h3>-->
-			<a href="/pokemones/${pokemon.nombre}}/modificarDatos">
-				<input class="button" type="button" value="Modificar Datos">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/editar}">
+				<input class="button" type="button" value="Editar Datos">
 			</a>
 		</div>
 		
@@ -29,22 +29,22 @@
 				<h3 class="pokemon__skill-list-name" th:text="${habilidad.nombre}"></h3>
 				<h3 class="pokemon__skill-list-desc" th:text="${habilidad.descripcion}"></h3>
 			</div>
-			<a href="/pokemones/{{nombre}}/agregarHabilidad">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarHabilidad}">
 				<input class="button" type="button" value="Agregar Habilidad">
 			</a>
-			<a href="/pokemones/{{nombre}}/quitarHabilidad">
-				<input class="button" type="button" value="Quitar Habilidad">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}">
+				<input class="button" type="button" value="Eliminar Habilidad">
 			</a>
 		</div>
 		
 		<div class="pokemon__type">
 			<h2 class="pokemon__type-title">TIPOS</h2>			
 			<h3 class="pokemon__type-name" th:each="tipo : ${pokemon.tipos}" th:text="${tipo.nombre}"></h3>
-			<a href="/pokemones/{{nombre}}/agregarTipo">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}">
 				<input class="button" type="button" value="Agregar Tipo">
 			</a>
-			<a href="/pokemones/{{nombre}}/quitarTipo">
-				<input class="button" type="button" value="Quitar Tipo">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}">
+				<input class="button" type="button" value="Eliminar Tipo">
 			</a>
 		</div>
 		
@@ -56,7 +56,7 @@
 					<h3 th:src="${evolucion.nombre}"></h3>
 				</div>
 			</div>
-			<a href="/pokemones/{{nombre}}/agregarEvolucion">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}">
 				<input class="button" type="button" value="Agregar Evolucion">
 			</a>
 		</div>

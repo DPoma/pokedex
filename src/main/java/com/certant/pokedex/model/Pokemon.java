@@ -136,16 +136,16 @@ public class Pokemon implements Serializable{
 		this.habilidades.add(habilidad);
 	}
 	
-	public void quitarHabilidad(String nombreHabilidad) {
-		this.habilidades.remove(this.buscarHabilidad(nombreHabilidad));
+	public void quitarHabilidad(Habilidad habilidad) {
+		this.habilidades.remove(this.buscarHabilidad(habilidad.getNombre()));
 	}
 	
 	public void agregarTipo(Tipo tipo) {
 		this.tipos.add(tipo);
 	}
 	
-	public void quitarTipo(String nombreTipo) {
-		this.tipos.remove(this.buscarTipo(nombreTipo));
+	public void quitarTipo(Tipo tipo) {
+		this.tipos.remove(this.buscarTipo(tipo.getNombre()));
 	}
 	
 	public void modificarDatos(String nombre, String descripcion, String nivel) {
@@ -168,13 +168,5 @@ public class Pokemon implements Serializable{
 	
 	public Pokemon buscarEvolucion(String nombre) {
 		return null;
-	}
-
-	@Override
-	public String toString() {
-		return "Pokemon [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivelRequerido="
-				+ nivelRequerido + ", imagen=" + imagen + ", tipos=" + tipos + ", habilidades=" + habilidades + "]";
-	}
-	
-	
+	}	
 }
