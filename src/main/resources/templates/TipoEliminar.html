@@ -17,10 +17,10 @@
 	<section class="section">
 		<h1 class="title">QUITAR TIPO</h1>
 		<h2>Por favor, seleccione un tipo para quitar.</h2>
-		<form th:object="${tipo}" th:action="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}" method="POST">
-			<select class="select" name="id" required>
+		<form th:object="${tipoId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}" method="POST">
+			<select class="select" name="tipoId" required>
 				<option value="" selected="true" disabled>Seleccione un tipo</option>
-				<option th:each="tipoSelect : ${pokemon.tipos}" th:text=${tipoSelect.nombre} th:value="${tipoSelect.id}"></option>
+				<option th:each="tipo : ${pokemon.tipos}" th:text=${tipo.nombre} th:value="${tipo.id}"></option>
 			</select>
 			<input class="button" type="submit" value="Guardar">
 		</form>

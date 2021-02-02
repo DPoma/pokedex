@@ -63,8 +63,7 @@ public class Controlador {
 	@PostMapping("/pokemones/{id}/agregarHabilidad")
 	public String agregarHabilidadPost(Pokemon pokemon, int habilidadId) {
 		pokemon = pokemonService.buscar(pokemon);
-		Habilidad habilidad = new Habilidad();
-		habilidad.setId(habilidadId);
+		Habilidad habilidad = new Habilidad(habilidadId);
 		habilidad = habilidadService.buscar(habilidad);
 		pokemon.agregarHabilidad(habilidad);
 		pokemonService.guardar(pokemon);
@@ -79,8 +78,9 @@ public class Controlador {
 	}
 	
 	@PostMapping("/pokemones/{id}/eliminarHabilidad")
-	public String eliminarHabilidadPost(Pokemon pokemon, Habilidad habilidad) {
+	public String eliminarHabilidadPost(Pokemon pokemon, int habilidadId) {
 		pokemon = pokemonService.buscar(pokemon);
+		Habilidad habilidad = new Habilidad(habilidadId);
 		habilidad = habilidadService.buscar(habilidad);
 		pokemon.quitarHabilidad(habilidad);
 		pokemonService.guardar(pokemon);
@@ -97,8 +97,9 @@ public class Controlador {
 	}
 	
 	@PostMapping("/pokemones/{id}/agregarTipo")
-	public String agregarTipoPost(Pokemon pokemon, Tipo tipo) {
+	public String agregarTipoPost(Pokemon pokemon, int tipoId) {
 		pokemon = pokemonService.buscar(pokemon);
+		Tipo tipo = new Tipo(tipoId);
 		tipo = tipoService.buscar(tipo);
 		pokemon.agregarTipo(tipo);
 		pokemonService.guardar(pokemon);
@@ -113,8 +114,9 @@ public class Controlador {
 	}
 	
 	@PostMapping("/pokemones/{id}/eliminarTipo")
-	public String eliminarTipoPost(Pokemon pokemon, Tipo tipo) {
+	public String eliminarTipoPost(Pokemon pokemon, int tipoId) {
 		pokemon = pokemonService.buscar(pokemon);
+		Tipo tipo = new Tipo(tipoId);
 		tipo = tipoService.buscar(tipo);
 		pokemon.quitarTipo(tipo);
 		pokemonService.guardar(pokemon);

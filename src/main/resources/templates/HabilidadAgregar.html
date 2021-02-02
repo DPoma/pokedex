@@ -20,7 +20,7 @@
 		<form th:object="${habilidadId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarHabilidad}" method="POST">
 			<select class="select" name="habilidadId" required>
 				<option value="" selected="true" disabled>Seleccione una habilidad</option>
-				<option th:each="habilidadSelect : ${habilidades}" th:text=${habilidadSelect.nombre} th:value="${habilidadSelect.id}"></option>
+				<option th:each="habilidad : ${habilidades}" th:text=${habilidad.nombre} th:value="${habilidad.id}"></option>
 			</select> 
 			<input class="button" type="submit" value="Guardar">
 		</form>

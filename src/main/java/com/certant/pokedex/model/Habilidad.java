@@ -29,6 +29,10 @@ public class Habilidad implements Serializable {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
+	
+	public Habilidad(int id) {
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
