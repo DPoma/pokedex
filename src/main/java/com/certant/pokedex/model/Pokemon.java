@@ -74,10 +74,10 @@ public class Pokemon implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public int getNivel() {
+	public int getNivelRequerido() {
 		return nivelRequerido;
 	}
-	public void setNivel(int nivel) {
+	public void setNivelRequerido(int nivel) {
 		this.nivelRequerido = nivel;
 	}
 	

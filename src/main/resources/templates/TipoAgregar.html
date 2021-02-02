@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<title>Agregar Tipo - Pokedex</title>
 	<meta charset="UTF-8">
 	<meta name="author" content="Dario Poma">
 	<meta name="keywords" content="Pokedex, Certant, Pokemon">
@@ -12,11 +13,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body">
 	<section class="section">
 		<h1 class="title">AGREGAR TIPO</h1>
 		<h2>Por favor, seleccione un tipo para agregar.</h2>
-		<form th:object="${tipo}" action="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}" method="POST">
+		<form th:object="${tipo}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}" method="POST">
 			<select class="select" name="id" required>
 				<option value="" selected="true" disabled>Seleccione un tipo</option>
 				<option th:each="tipoSelect : ${tipos}" th:text=${tipoSelect.nombre} th:value="${tipoSelect.id}"></option>

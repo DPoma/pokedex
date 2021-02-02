@@ -33,7 +33,7 @@ public class PokemonTest {
 	public void datosDelPokemonDebenSerObtenidosTest() {
 		Pokemon pidgey = RepositorioPokemones.buscar("Pidgey");
 		assertEquals("Pidgey", pidgey.getNombre());
-		assertEquals(1, pidgey.getNivel());
+		assertEquals(1, pidgey.getNivelRequerido());
 	}
 	
 	@Test
@@ -67,9 +67,9 @@ public class PokemonTest {
 		Pokemon pidgeotto = pidgey.buscarEvolucion("Pidgeotto");
 		Pokemon pidgeot = pidgey.buscarEvolucion("Pidgeot");
 		assertEquals("Pidgeotto", pidgeotto.getNombre());
-		assertEquals(18, pidgeotto.getNivel());
+		assertEquals(18, pidgeotto.getNivelRequerido());
 		assertEquals("Pidgeot", pidgeot.getNombre());
-		assertEquals(36, pidgeot.getNivel());
+		assertEquals(36, pidgeot.getNivelRequerido());
 	}
 	
 	@Test
@@ -99,14 +99,14 @@ public class PokemonTest {
 		Habilidad vistaLince = RepositorioHabilidades.buscar("VistaLince");
 		Tipo veneno = RepositorioTipos.buscar("Veneno");
 		geodude.setNombre("GeodudeVenenoso");
-		geodude.setNivel(20);
+		geodude.setNivelRequerido(20);
 		geodude.agregarTipo(veneno);
 		geodude.agregarHabilidad(vistaLince);
 		DataAccessObject.persistirElementoTest(geodude);
 		//DataAccessObject.obtenerPokemones();
 		Pokemon geodudeVenenoso = RepositorioPokemones.buscar("GeodudeVenenoso");
 		assertEquals("GeodudeVenenoso", geodudeVenenoso.getNombre());
-		assertEquals(20, geodudeVenenoso.getNivel());
+		assertEquals(20, geodudeVenenoso.getNivelRequerido());
 		assertTrue(geodudeVenenoso.tieneEsaHabilidad(vistaLince));
 		assertTrue(geodudeVenenoso.esTipo(veneno));
 	}

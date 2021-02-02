@@ -62,7 +62,7 @@ public class RepositorioPokemones {
 			pokemones.add(((PokemonEvolucion)pokemon).getPokemonBase());
 		for(Pokemon evolucion : evoluciones)
 			pokemones.add(evolucion);
-		Collections.sort(pokemones, Comparator.comparing(Pokemon::getNivel));
+		Collections.sort(pokemones, Comparator.comparing(Pokemon::getNivelRequerido));
 		return pokemones;
 	}
  }

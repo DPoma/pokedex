@@ -13,11 +13,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body">
 	<section class="section">
 		<h1 class="title">ELIMINAR HABILIDAD</h1>
 		<h2>Por favor, seleccione una habilidad para eliminar.</h2>
-		<form th:object="${habilidad}" action="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}" method="POST">
+		<form th:object="${habilidad}" th:action="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}" method="POST">
 			<select class="select" name="id" required>
 				<option value="" selected="true" disabled>Seleccione una habilidad</option>
 				<option th:each="habilidadSelect : ${pokemon.habilidades}" th:text=${habilidadSelect.nombre} th:value="${habilidadSelect.id}"></option>

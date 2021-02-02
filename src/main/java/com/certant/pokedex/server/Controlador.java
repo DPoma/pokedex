@@ -61,8 +61,10 @@ public class Controlador {
 	}
 	
 	@PostMapping("/pokemones/{id}/agregarHabilidad")
-	public String agregarHabilidadPost(Pokemon pokemon, Habilidad habilidad) {
+	public String agregarHabilidadPost(Pokemon pokemon, int habilidadId) {
 		pokemon = pokemonService.buscar(pokemon);
+		Habilidad habilidad = new Habilidad();
+		habilidad.setId(habilidadId);
 		habilidad = habilidadService.buscar(habilidad);
 		pokemon.agregarHabilidad(habilidad);
 		pokemonService.guardar(pokemon);
@@ -129,7 +131,6 @@ public class Controlador {
 	@PostMapping("/pokemones/{id}/agregarEvolucion")
 	public String agregarEvolucionPost(Pokemon pokemon, Pokemon evolucion) {
 		pokemon = pokemonService.buscar(pokemon);
-		evolucion = pokemonService.buscar(evolucion);
 		pokemon.agregarEvolucion(evolucion);
 		pokemonService.guardar(pokemon);
 		return "redirect:/pokemones/{id}";
