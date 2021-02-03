@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.certant.pokedex.handlers.FileHandler;
+import com.certant.pokedex.model.Ejemplar;
 import com.certant.pokedex.model.Habilidad;
 import com.certant.pokedex.model.Pokemon;
 import com.certant.pokedex.model.PokemonBase;
@@ -22,6 +23,7 @@ import com.certant.pokedex.repositories.RepositorioEjemplares;
 import com.certant.pokedex.repositories.RepositorioHabilidades;
 import com.certant.pokedex.repositories.RepositorioPokemones;
 import com.certant.pokedex.repositories.RepositorioTipos;
+import com.certant.pokedex.repositories.RepositorioUsuarios;
 import com.certant.pokedex.service.EjemplarService;
 import com.certant.pokedex.service.HabilidadService;
 import com.certant.pokedex.service.PokemonService;
@@ -180,6 +182,25 @@ public class Controlador {
 		model.addAttribute("usuario", username);
 		model.addAttribute("ejemplares", RepositorioEjemplares.obtenerDeUsuario(username));
 		return "Ejemplares";
+	}
+	
+	@GetMapping("/ejemplares/agregar")
+	public String ejemplarAgregarGet(Pokemon pokemon, Integer nivelActual, Model model) {
+		model.addAttribute("pokemon", pokemon);
+		model.addAttribute("nivelActual", nivelActual);
+		model.addAttribute("pokemones", pokemonService.obtener());
+		return "EjemplarAgregar";
+	}
+	
+	@PostMapping("/ejemplares/agregar")
+	public String ejemplarAgregarPost(Pokemon pokemon, Integer nivelActual) {
+		pokemon = pokemonService.buscar(pokemon);
+		RepositorioUsuarios.setUsuarios(usuarioService.obtener());
+		String nombreUsuario = SecurityContextHolder.getContext().getAuthentication().getName();	
+		Usuario usuario = RepositorioUsuarios.buscar(nombreUsuario);
+		Ejemplar ejemplar = new Ejemplar(pokemon, usuario, 3);
+		ejemplarService.guardar(ejemplar);
+		return "redirect:/ejemplares";
 	}
 	
 	@GetMapping("/pokemones/{id}/editar")

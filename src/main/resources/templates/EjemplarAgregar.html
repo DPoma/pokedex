@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Layout</title>
+	<title>Agregar Ejemplar - Pokedex</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 	<section class="section">
 	<h1>AGREGAR EJEMPLAR</h1>
 	<h2>Por favor, seleccione un pokemon.</h2>
-	<form action="/pokemones/verEjemplar" method="POST">	
-		<select class="select" name="nombrePokemon" required>
+	<form th:action="@{/ejemplares/agregar}" method="POST">	
+		<select th:object="${pokemon}"class="select" name="id" required>
 			<option value="" selected="true" disabled>Seleccione un pokemon</option>
-			<option value="{{nombre}}">{{nombre}}</option>
+			<option th:each="pokemonSel : ${pokemones}" th:text="${pokemonSel.nombre}" th:value="${pokemonSel.id}"></option>
 		</select>	
-		<h3>Nivel Actual</h3>
-		<input class="input" name="nivelPokemon" type="number" min=1 max=1000 required>
+		<label class="title" for="nivelRequerido">Nivel Requerido</label>		
+		<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:text="${nivelActual}" required>
 		<input class="button" type="submit" value="Guardar">
 	</form>
 </section>

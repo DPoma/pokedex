@@ -21,12 +21,12 @@
 				<th class="table__th"><h2>Pokemon</h2></th>
 				<th class="table__th"><h2>Nivel Actual</h2></th>
 			</tr>
-			<tr th:each="ejemplares : ${ejemplares}">
+			<tr th:each="ejemplar : ${ejemplares}">
 				<td><h2 th:text="${ejemplar.pokemon.nombre}"></h2></td>
 				<td><h2 th:text="${ejemplar.nivelActual}"></h2></td>
 			</tr>
 		</table>
-		<a href="/pokemones/ejemplares/agregar">
+		<a th:href="@{/ejemplares/agregar}">
 			<input class="button" type="button" value="Agregar Ejemplar">
 		</a>
 	</section>
