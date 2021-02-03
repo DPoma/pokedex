@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name = "Usuarios")
 public class Usuario implements Serializable {
@@ -16,21 +18,12 @@ public class Usuario implements Serializable {
 	private String username;
 	
 	private String password;
-	
-	private String name;
-	
+		
 	public Usuario()
 	{
 
 	}
-	
-	public Usuario(String name, String user, String password)
-	{
-		this.username = user;
-		this.password = password;
-		this.name = name;
-	}
-	
+		
 	public int getId() {
 		return id;
 	}
@@ -52,19 +45,11 @@ public class Usuario implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = this.encriptarPassword(password);
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean loginExitoso(String username, String password)
-	{
-		return this.username.equals(username) && this.password.equals(password);
+	public String encriptarPassword(String password) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder.encode(password);
 	}
 }

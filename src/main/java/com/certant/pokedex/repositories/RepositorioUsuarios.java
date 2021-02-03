@@ -25,8 +25,4 @@ public class RepositorioUsuarios {
 	public static boolean existe(String username) {
 		return ListHandler.cumpleCondicionElemento(usuarios, usuario -> usuario.getUsername().equals(username));
 	}
-	
-	public static boolean loguear(String username, String password) {
-		return ListHandler.cumpleCondicionElemento(usuarios, usuario -> usuario.loginExitoso(username, password));
-	}
 }

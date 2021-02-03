@@ -8,39 +8,51 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.certant.pokedex.handlers.FileHandler;
 import com.certant.pokedex.model.Habilidad;
 import com.certant.pokedex.model.Pokemon;
 import com.certant.pokedex.model.PokemonBase;
 import com.certant.pokedex.model.PokemonEvolucion;
 import com.certant.pokedex.model.Tipo;
+import com.certant.pokedex.model.Usuario;
 import com.certant.pokedex.repositories.RepositorioHabilidades;
 import com.certant.pokedex.repositories.RepositorioPokemones;
 import com.certant.pokedex.repositories.RepositorioTipos;
-import com.certant.pokedex.service.IEjemplarService;
-import com.certant.pokedex.service.IHabilidadService;
-import com.certant.pokedex.service.IPokemonService;
-import com.certant.pokedex.service.ITipoService;
+import com.certant.pokedex.service.EjemplarService;
+import com.certant.pokedex.service.HabilidadService;
+import com.certant.pokedex.service.PokemonService;
+import com.certant.pokedex.service.TipoService;
+import com.certant.pokedex.service.UsuarioService;
 import com.opencsv.exceptions.CsvValidationException;
 
 @Controller
 public class Controlador {
 	
 	@Autowired
-	private IPokemonService pokemonService;
+	private PokemonService pokemonService;
 	@Autowired
-	private IHabilidadService habilidadService;
+	private HabilidadService habilidadService;
 	@Autowired
-	private ITipoService tipoService;
+	private TipoService tipoService;
 	@Autowired
-	private IEjemplarService ejemplarService;
+	private EjemplarService ejemplarService;
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/")
-	public String inicio() throws CsvValidationException {
-		//FileHandler.extraerDatos();
-		//List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
-		//for(Pokemon pokemon : pokemones)
-			//pokemonService.guardar(pokemon);
+	public String inicio() {
 		return "Home";
+	}
+	
+	@GetMapping("/login")
+	public String login() throws CsvValidationException {
+		/*
+		FileHandler.extraerDatos();
+		List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
+		for(Pokemon pokemon : pokemones)
+			pokemonService.guardar(pokemon);
+			*/
+		return "Login";
 	}
 	
 	@GetMapping("/pokemones")
@@ -178,5 +190,17 @@ public class Controlador {
 		pokemon.editarDatos(nombre, descripcion, nivelRequerido);
 		pokemonService.guardar(pokemon);
 		return "redirect:/pokemones/{id}";
+	}
+	
+	@GetMapping("/registro")
+	public String registroGet(Usuario usuario, Model model) {
+		model.addAttribute("usuario", usuario);
+		return "Registro";
+	}
+	
+	@PostMapping("/registro")
+	public String registroPost(Usuario usuario) {
+		usuarioService.guardar(usuario);
+		return "redirect:/login";
 	}
 }

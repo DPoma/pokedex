@@ -21,7 +21,7 @@
 		<label class="title" for="password">Contrasena</label>
 		<input class="input" type="password" name="password" id="password" required>
 		<input class="button" type="submit" value="Login">
-		<a class="signup" href="/">Registrarse</a>
+		<a class="signup" th:href="@{/registro}">Registrarse</a>
 	</form>
 	<footer th:replace="layout :: footer"></footer>
 </body>
