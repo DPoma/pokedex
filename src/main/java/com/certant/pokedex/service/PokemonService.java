@@ -17,7 +17,7 @@ public class PokemonService implements IPokemonService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Pokemon> pokemones() {
+	public List<Pokemon> obtener() {
 		return (List<Pokemon>)pokemonDAO.findAll();
 	}
 

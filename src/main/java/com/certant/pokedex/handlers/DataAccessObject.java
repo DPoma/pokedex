@@ -26,7 +26,7 @@ public class DataAccessObject {
 	}
 			
 	public boolean baseDatosEstaVacia() {
-		pokemonService.pokemones();
+		pokemonService.obtener();
 		return RepositorioPokemones.getPokemones().isEmpty();
 	}
 	

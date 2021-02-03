@@ -17,7 +17,7 @@ public class TipoService implements ITipoService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Tipo> tipos() {
+	public List<Tipo> obtener() {
 		return (List<Tipo>)tipoDAO.findAll();
 	}
 

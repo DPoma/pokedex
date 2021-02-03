@@ -17,7 +17,7 @@ import com.certant.pokedex.dao.UsuarioDAO;
 import com.certant.pokedex.model.Usuario;
 
 @Service("userDetailsService")
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService implements IUsuarioService, UserDetailsService {
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -34,7 +34,7 @@ public class UsuarioService implements UserDetailsService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Usuario> usuarios() {
+	public List<Usuario> obtener() {
 		return (List<Usuario>)usuarioDAO.findAll();
 	}
 

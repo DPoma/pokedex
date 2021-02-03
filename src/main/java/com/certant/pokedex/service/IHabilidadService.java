@@ -6,7 +6,7 @@ import com.certant.pokedex.model.Habilidad;
 
 public interface IHabilidadService {
 	
-	public List<Habilidad> habilidades();
+	public List<Habilidad> obtener();
 	
 	public void guardar(Habilidad habilidad);
 	

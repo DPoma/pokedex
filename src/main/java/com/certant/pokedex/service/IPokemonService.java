@@ -6,7 +6,7 @@ import com.certant.pokedex.model.Pokemon;
 
 public interface IPokemonService {
 	
-	public List<Pokemon> pokemones();
+	public List<Pokemon> obtener();
 	
 	public void guardar(Pokemon pokemon);
 	

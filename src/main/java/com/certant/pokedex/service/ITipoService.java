@@ -6,7 +6,7 @@ import com.certant.pokedex.model.Tipo;
 
 public interface ITipoService {
 	
-	public List<Tipo> tipos();
+	public List<Tipo> obtener();
 	
 	public void guardar(Tipo tipo);
 	

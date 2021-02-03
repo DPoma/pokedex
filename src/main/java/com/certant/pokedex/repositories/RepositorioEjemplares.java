@@ -31,9 +31,9 @@ public class RepositorioEjemplares {
 		return ListHandler.buscarElemento(ejemplares, ejemplar -> ejemplar.getPokemon().getNombre().equals(nombre));
 	}
 		
-	public static List<Ejemplar> obtenerDeUsuario(Usuario usuario) {
+	public static List<Ejemplar> obtenerDeUsuario(String username) {
 		return ListHandler.filtrarElementos(ejemplares, ejemplar -> 
 		ejemplar.getUsuario().getUsername()
-		.equals(usuario.getUsername()));
+		.equals(username));
 	}
 }

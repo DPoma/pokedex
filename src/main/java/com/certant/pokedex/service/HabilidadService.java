@@ -17,7 +17,7 @@ public class HabilidadService implements IHabilidadService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Habilidad> habilidades() {
+	public List<Habilidad> obtener() {
 		return (List<Habilidad>)habilidadDAO.findAll();
 	}
 

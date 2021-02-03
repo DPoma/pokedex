@@ -3,6 +3,9 @@ package com.certant.pokedex.server;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import com.certant.pokedex.model.PokemonBase;
 import com.certant.pokedex.model.PokemonEvolucion;
 import com.certant.pokedex.model.Tipo;
 import com.certant.pokedex.model.Usuario;
+import com.certant.pokedex.repositories.RepositorioEjemplares;
 import com.certant.pokedex.repositories.RepositorioHabilidades;
 import com.certant.pokedex.repositories.RepositorioPokemones;
 import com.certant.pokedex.repositories.RepositorioTipos;
@@ -57,7 +61,7 @@ public class Controlador {
 	
 	@GetMapping("/pokemones")
 	public String pokemonesGet(Model model, Pokemon pokemon) {
-		List<Pokemon> pokemones = pokemonService.pokemones();
+		List<Pokemon> pokemones = pokemonService.obtener();
 		model.addAttribute("pokemones", pokemones);
 		return "Pokemones";
 	}
@@ -73,7 +77,7 @@ public class Controlador {
 	@GetMapping("/pokemones/{id}/agregarHabilidad")
 	public String agregarHabilidadGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
-		RepositorioHabilidades.setHabilidades(habilidadService.habilidades());
+		RepositorioHabilidades.setHabilidades(habilidadService.obtener());
 		model.addAttribute("pokemon", pokemon);
 		model.addAttribute("habilidades", RepositorioHabilidades.disponiblesPara(pokemon));
 		return "HabilidadAgregar";
@@ -109,7 +113,7 @@ public class Controlador {
 	@GetMapping("/pokemones/{id}/agregarTipo")
 	public String agregarTipoGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
-		RepositorioTipos.setTipos(tipoService.tipos());
+		RepositorioTipos.setTipos(tipoService.obtener());
 		model.addAttribute("pokemon", pokemon);
 		model.addAttribute("tipos", RepositorioTipos.disponiblesPara(pokemon));
 		return "TipoAgregar";
@@ -170,7 +174,11 @@ public class Controlador {
 	}
 	
 	@GetMapping("/ejemplares")
-	public String ejemplaresGet() {
+	public String ejemplaresGet(Model model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		RepositorioEjemplares.setEjemplares(ejemplarService.obtener());
+		model.addAttribute("usuario", username);
+		model.addAttribute("ejemplares", RepositorioEjemplares.obtenerDeUsuario(username));
 		return "Ejemplares";
 	}
 	
