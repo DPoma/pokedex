@@ -14,10 +14,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="body">
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 		<h1 class="title">AGREGAR EVOLUCION</h1>
 		<h2>Por favor, complete los siguientes datos.</h2>
-		<form th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}" method="POST">		
+		<form class="form" th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}" method="POST">		
 			<label class="title" for="nombre">Nombre</label>		
 			<input class="input" name="nombre" type="text" th:text="${evolucion.nombre}" required>
 			<label class="title" for="descripcion">Descripcion</label>		
@@ -29,5 +31,7 @@
 			<input class="button" type="submit" value="Guardar">
 		</form>
 	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
 </body>
 </html>

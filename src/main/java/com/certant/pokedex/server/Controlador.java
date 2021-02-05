@@ -185,20 +185,20 @@ public class Controlador {
 	}
 	
 	@GetMapping("/ejemplares/agregar")
-	public String ejemplarAgregarGet(Pokemon pokemon, Integer nivelActual, Model model) {
+	public String ejemplarAgregarGet(Pokemon pokemon, Model model) {
 		model.addAttribute("pokemon", pokemon);
-		model.addAttribute("nivelActual", nivelActual);
 		model.addAttribute("pokemones", pokemonService.obtener());
 		return "EjemplarAgregar";
 	}
 	
 	@PostMapping("/ejemplares/agregar")
-	public String ejemplarAgregarPost(Pokemon pokemon, Integer nivelActual) {
+	public String ejemplarAgregarPost(Pokemon pokemon) {
+		int nivelActual = pokemon.getNivelRequerido();
 		pokemon = pokemonService.buscar(pokemon);
 		RepositorioUsuarios.setUsuarios(usuarioService.obtener());
 		String nombreUsuario = SecurityContextHolder.getContext().getAuthentication().getName();	
 		Usuario usuario = RepositorioUsuarios.buscar(nombreUsuario);
-		Ejemplar ejemplar = new Ejemplar(pokemon, usuario, 3);
+		Ejemplar ejemplar = new Ejemplar(pokemon, usuario, nivelActual);
 		ejemplarService.guardar(ejemplar);
 		return "redirect:/ejemplares";
 	}

@@ -20,6 +20,8 @@
 	font-weight: bold;
 	padding: 1em;
 	margin: 0;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .input {
@@ -35,14 +37,24 @@
 }
 
 .button {
-	margin: 3em 0;
+	margin: 4em auto;
 	width: 60%; 
 	font-weight: bold; 
 	padding: 1em; 
 	border-radius: 10px;
 	border: none;
 	background-color: #0275d8;
-	color: #FFF
+	color: #FFF;
+}
+
+.button__logout {
+	margin: 4em auto; 
+	font-weight: bold; 
+	padding: 1em; 
+	border-radius: 10px;
+	border: none;
+	background-color: red;
+	color: #FFF;
 }
 
 .signup {
@@ -107,6 +119,18 @@
 	color: white; 
 	transition: all 0.3s ease; 
 	border-radius: 10px;
+	text-decoration: none;
+}
+
+.navbar__item:active {
+	color: white; 
+	transition: all 0.3s ease; 
+	border-radius: 10px;
+	text-decoration: none;
+}
+
+.navbar__item-title {
+	font-weight: bold;
 }
 
 .pokemon__img {
@@ -119,27 +143,70 @@
 	border-radius: 10px; 
 	background-color: #a4b0be;
 	width: 80%;
-	margin: 2em auto;
+	margin: 5em auto;
+}
+
+.pokemon__button-green {
+	margin: 2em;
+	font-weight: bold; 
+	padding: 1em; 
+	border-radius: 10px;
+	border: none;
+	background-color: green;
+	color: #FFF;
+}
+
+.pokemon__button-red {
+	margin: 2em;
+	font-weight: bold; 
+	padding: 1em; 
+	border-radius: 10px;
+	border: none;
+	background-color: red;
+	color: #FFF;
+}
+
+.pokemon__div-button {
+	display: flex;
+	justify-content: center; 
 }
 
 .pokemon__skill-title, .pokemon__type-title, .pokemon__evolution-title {
-	border-bottom: 1px solid #000; 
+	border-radius: 10px;
 	padding: 15px 0;
+	background-color: #0275d8;
+	color: #FFF;
+	font-weight: bold;
 }
 
 .pokemon__info-name {
-	padding-top: 40px; 
+	padding: 1em 0; 
 	text-transform: uppercase;
+	font-weight: bold;
 }
 
 .pokemon__info-desc {
 	width: 80%; 
 	margin: auto;
+	padding: 0 0 1em 0;
 }
 
-.pokemon__skill-description {
+.pokemon__skill-list {
+	margin: 1em 0;
+}
+
+.pokemon__skill-list-name {
+	font-weight: bold;
+}
+
+.pokemon__skill-list-desc {
 	border-bottom: 1px solid #000; 
 	padding: 15px 0;
+}
+
+.pokemon__type-name {
+	margin: 1em 0;
+	font-weight: bold;
 }
 
 .pokemon__evolution-list {
@@ -158,10 +225,10 @@
 
 .pokemon__evolution-list-element-img {
 	width: 10em; 
-	padding: 1em;
+	padding-top: 1em;
 }
 
-.table {
+.ejemplar__table {
 	width: 60%; 
 	box-shadow: 0 0 10px #000; 
 	background: white; 
@@ -171,11 +238,46 @@
 	margin: 0 auto;
 }
 
-.table__th {
+.ejemplar__th {
 	padding: 1em 0; 
 	text-align: center;
 }
 
-.table__tr {
+.ejemplar__tr {
 	background: #a4b0be;
+}
+
+.pokemones {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.pokemones__box {
+	box-shadow: 0 0 10px #000;
+	border: none;
+	margin: 2em 1em;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.pokemones__box-img {
+	width: 20em;
+}
+
+.pokemones__box-name {
+	font-weight: bold;
+}
+
+.pokemones__box-button {
+	margin: 3em auto;
+	width: 60%; 
+	font-weight: bold; 
+	padding: 1em; 
+	border-radius: 10px;
+	border: none;
+	background-color: #0275d8;
+	color: #FFF
 }

@@ -21,16 +21,14 @@
 	</header>
 		
 	<nav class="navbar" th:fragment="navbar">		
-		<ul>
-			<li><a class="navbar__item" th:href="@{/pokemones}"><h3>VER POKEMONES</h3></a></li>
-			<li><a class="navbar__item" th:href="@{/pokemones/agregar}"><h3>AGREGAR POKEMON</h3></a></li>
-			<li><a class="navbar__item" th:href="@{/ejemplares}"><h3>MIS POKEMONES</h3></a></li>
-		</ul>
+		<a class="navbar__item" th:href="@{/pokemones}"><h3 class="navbar__item-title">VER POKEMONES</h3></a>
+		<a class="navbar__item" th:href="@{/pokemones/agregar}"><h3 class="navbar__item-title">AGREGAR POKEMON</h3></a>
+		<a class="navbar__item" th:href="@{/ejemplares}"><h3 class="navbar__item-title">MIS POKEMONES</h3></a>
 	</nav>
 	
-	<form method="POST" th:action="@{/logout}" th:fragment="logout">
+	<form class="form" method="POST" th:action="@{/logout}" th:fragment="logout">
 		<a href="#" onclick="this.parentNode.submit();">
-			<input class="button" type="button" value="logout">
+			<input class="button__logout" type="button" value="CERRAR SESIÓN">
 		</a>
 	</form>
 	

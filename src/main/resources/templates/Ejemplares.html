@@ -13,13 +13,15 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body">
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
-		<h1 class="title" th:text=${usuario}></h1>
-		<table class="table">
-			<tr class="table__tr">
-				<th class="table__th"><h2>Pokemon</h2></th>
-				<th class="table__th"><h2>Nivel Actual</h2></th>
+		<h1 class="title">POKEMONES CAPTURADOS</h1>
+		<table class="ejemplar__table">
+			<tr class="ejemplar__tr">
+				<th class="ejemplar__th"><h2>Pokemon</h2></th>
+				<th class="ejemplar__th"><h2>Nivel Actual</h2></th>
 			</tr>
 			<tr th:each="ejemplar : ${ejemplares}">
 				<td><h2 th:text="${ejemplar.pokemon.nombre}"></h2></td>
@@ -30,5 +32,7 @@
 			<input class="button" type="button" value="Agregar Ejemplar">
 		</a>
 	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
 </body>
 </html>

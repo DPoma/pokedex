@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
 	<title>Pokemon - Pokedex</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="body">
 
@@ -16,7 +24,7 @@
 		
 		<div class="pokemon__info">
 			<h2 class="pokemon__info-name" th:text="${pokemon.nombre}"></h2>
-			<h3 class="pokemon_info-desc" th:text="${pokemon.descripcion}"></h3>
+			<h3 class="pokemon__info-desc" th:text="${pokemon.descripcion}"></h3>
 			<h3 th:text="@{Nivel Requerido: } + ${pokemon.nivelRequerido}"></h3>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/editar}">
 				<input class="button" type="button" value="Editar Datos">
@@ -29,22 +37,24 @@
 				<h3 class="pokemon__skill-list-name" th:text="${habilidad.nombre}"></h3>
 				<h3 class="pokemon__skill-list-desc" th:text="${habilidad.descripcion}"></h3>
 			</div>
-			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarHabilidad}">
-				<input class="button" type="button" value="Agregar Habilidad">
-			</a>
-			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}">
-				<input class="button" type="button" value="Eliminar Habilidad">
-			</a>
+			<div class="pokemon__div-button">
+				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarHabilidad}">
+					<input class="pokemon__button-green" type="button" value="Agregar Habilidad">
+				</a>
+				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}">
+					<input class="pokemon__button-red" type="button" value="Eliminar Habilidad">
+				</a>
+			</div>
 		</div>
 		
 		<div class="pokemon__type">
 			<h2 class="pokemon__type-title">TIPOS</h2>			
 			<h3 class="pokemon__type-name" th:each="tipo : ${pokemon.tipos}" th:text="${tipo.nombre}"></h3>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}">
-				<input class="button" type="button" value="Agregar Tipo">
+				<input class="pokemon__button-green" type="button" value="Agregar Tipo">
 			</a>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}">
-				<input class="button" type="button" value="Eliminar Tipo">
+				<input class="pokemon__button-red" type="button" value="Eliminar Tipo">
 			</a>
 		</div>
 		
@@ -53,7 +63,8 @@
 			<div class="pokemon__evolution-list">
 				<div class="pokemon__evolution-list-element" th:each="evolucion : ${evoluciones}">
 					<img class="pokemon__evolution-list-element-img" th:src="${evolucion.imagen}">
-					<h3 th:src="${evolucion.nombre}"></h3>
+					<h3 th:text="${evolucion.nombre}"></h3>
+					<h3 th:text="${evolucion.nivelRequerido}"></h3>
 				</div>
 			</div>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}">

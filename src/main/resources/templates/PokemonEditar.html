@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Layout</title>
+	<title>Agregar Pokemon - Pokedex</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body">
 <section class="section">
-	<h1 class="title">MODIFICAR DATOS</h1>
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
+	<h1 class="title">EDITAR DATOS</h1>
 	<h2>Por favor, complete los datos con los nuevos valores.</h2>
-	<form th:object="${pokemon}" th:action="@{/pokemones/} + ${pokemon.id} + @{/editar}" method="POST">		
-		<label class="title" for="nombre" >Nombre</label>
-		<input class="input" name="nombre" type="text" th:value="${pokemon.nombre}" required>
-		<label class="title" for="descripcion" >Descripcion</label>
-		<input class="input" name="descripcion" type="text" th:value="${pokemon.descripcion}" required>
-		<label class="title" for="nivelRequerido" >Nivel Requerido</label>
-		<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:value="${pokemon.nivelRequerido}" required>
-		<input class="button" type="submit" value="Guardar Cambios">
-	</form>
-</section>
+		<form class="form" th:object="${pokemon}" th:action="@{/pokemones/} + ${pokemon.id} + @{/editar}" method="POST">		
+			<label class="title" for="nombre" >Nombre</label>
+			<input class="input" name="nombre" type="text" th:value="${pokemon.nombre}" required>
+			<label class="title" for="descripcion" >Descripcion</label>
+			<input class="input" name="descripcion" type="text" th:value="${pokemon.descripcion}" required>
+			<label class="title" for="nivelRequerido" >Nivel Requerido</label>
+			<input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:value="${pokemon.nivelRequerido}" required>
+			<input class="button" type="submit" value="Guardar Cambios">
+		</form>
+	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
 </body>
 </html>

@@ -14,6 +14,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="body">
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 		<h1 class="title">ELIMINAR HABILIDAD</h1>
 		<h2>Por favor, seleccione una habilidad para eliminar.</h2>
@@ -25,5 +27,7 @@
 			<input class="button" type="submit" value="Guardar">
 		</form>
 	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
 </body>
 </html>
