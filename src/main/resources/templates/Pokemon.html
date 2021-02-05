@@ -38,10 +38,10 @@
 				<h3 class="pokemon__skill-list-desc" th:text="${habilidad.descripcion}"></h3>
 			</div>
 			<div class="pokemon__div-button">
-				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarHabilidad}">
+				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/habilidades/agregar}">
 					<input class="pokemon__button-green" type="button" value="Agregar Habilidad">
 				</a>
-				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}">
+				<a th:href="@{/pokemones/} + ${pokemon.id} + @{/habilidades/eliminar}">
 					<input class="pokemon__button-red" type="button" value="Eliminar Habilidad">
 				</a>
 			</div>
@@ -50,10 +50,10 @@
 		<div class="pokemon__type">
 			<h2 class="pokemon__type-title">TIPOS</h2>			
 			<h3 class="pokemon__type-name" th:each="tipo : ${pokemon.tipos}" th:text="${tipo.nombre}"></h3>
-			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/tipos/agregar}">
 				<input class="pokemon__button-green" type="button" value="Agregar Tipo">
 			</a>
-			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/eliminarTipo}">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/tipos/eliminar}">
 				<input class="pokemon__button-red" type="button" value="Eliminar Tipo">
 			</a>
 		</div>
@@ -67,7 +67,7 @@
 					<h3 th:text="${evolucion.nivelRequerido}"></h3>
 				</div>
 			</div>
-			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}">
+			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/evoluciones/agregar}">
 				<input class="button" type="button" value="Agregar Evolucion">
 			</a>
 		</div>

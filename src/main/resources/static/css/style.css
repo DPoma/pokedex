@@ -104,7 +104,8 @@
 	width: 20em; 
 	background-color: #a4b0be; 
 	border-radius:50%; 
-	padding:2em;
+	padding: 2em;
+	margin: 2em;
 }
 
 .navbar {
@@ -120,6 +121,7 @@
 	transition: all 0.3s ease; 
 	border-radius: 10px;
 	text-decoration: none;
+	padding: 0 3em;
 }
 
 .navbar__item:active {
@@ -127,6 +129,14 @@
 	transition: all 0.3s ease; 
 	border-radius: 10px;
 	text-decoration: none;
+}
+
+.navbar__item:hover {
+	color: white; 
+	transition: all 0.3s ease; 
+	border-radius: 10px;
+	text-decoration: none;
+	background-color: #0275d8;
 }
 
 .navbar__item-title {
@@ -250,7 +260,6 @@
 .pokemones {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
 	width: 90%;
 	margin: 0 auto;
 }
@@ -261,10 +270,12 @@
 	margin: 2em 1em;
 	text-align: center;
 	border-radius: 10px;
+	background-color: #a4b0be;
 }
 
 .pokemones__box-img {
 	width: 20em;
+	margin: 2em;
 }
 
 .pokemones__box-name {

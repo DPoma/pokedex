@@ -18,8 +18,7 @@
 	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 		<h1 class="title">AGREGAR EVOLUCION</h1>
-		<h2>Por favor, complete los siguientes datos.</h2>
-		<form class="form" th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarEvolucion}" method="POST">		
+		<form class="form" th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/evoluciones/agregar}" method="POST">		
 			<label class="title" for="nombre">Nombre</label>		
 			<input class="input" name="nombre" type="text" th:text="${evolucion.nombre}" required>
 			<label class="title" for="descripcion">Descripcion</label>		

@@ -18,7 +18,6 @@
 	<header th:replace="layout :: header"></header>
 	<nav th:replace="layout :: navbar"></nav>
 	<h1 class="title">EDITAR DATOS</h1>
-	<h2>Por favor, complete los datos con los nuevos valores.</h2>
 		<form class="form" th:object="${pokemon}" th:action="@{/pokemones/} + ${pokemon.id} + @{/editar}" method="POST">		
 			<label class="title" for="nombre" >Nombre</label>
 			<input class="input" name="nombre" type="text" th:value="${pokemon.nombre}" required>

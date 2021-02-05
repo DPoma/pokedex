@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.certant.pokedex.handlers.ListHandler;
 import com.certant.pokedex.model.Ejemplar;
-import com.certant.pokedex.model.Usuario;
 
 public class RepositorioEjemplares {
 	

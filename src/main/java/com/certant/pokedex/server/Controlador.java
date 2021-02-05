@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,20 +43,34 @@ public class Controlador {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/")
-	public String inicio() {
-		return "Home";
-	}
-	
 	@GetMapping("/login")
 	public String login() throws CsvValidationException {
-		/*
-		FileHandler.extraerDatos();
-		List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
-		for(Pokemon pokemon : pokemones)
-			pokemonService.guardar(pokemon);
-			*/
+		if(tipoService.obtener().isEmpty()) {
+			FileHandler.extraerDatos();
+			List<Pokemon> pokemones = RepositorioPokemones.obtenerBases();
+			for(Pokemon pokemon : pokemones)
+				pokemonService.guardar(pokemon);	
+		}
 		return "Login";
+	}
+	
+	@GetMapping("/registro")
+	public String registroGet(Usuario usuario, Model model) {
+		model.addAttribute("usuario", usuario);
+		return "Registro";
+	}
+	
+	@PostMapping("/registro")
+	public String registroPost(Usuario usuario) {
+		usuarioService.guardar(usuario);
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/")
+	public String inicio(Model model) {
+		String nombreUsuario = SecurityContextHolder.getContext().getAuthentication().getName();	
+		model.addAttribute("username", nombreUsuario);
+		return "Home";
 	}
 	
 	@GetMapping("/pokemones")
@@ -76,7 +88,40 @@ public class Controlador {
 		return "Pokemon";
 	}
 	
-	@GetMapping("/pokemones/{id}/agregarHabilidad")
+	@GetMapping("/pokemones/agregar")
+	public String agregarPokemonGet(PokemonBase pokemon, Model model) {
+		model.addAttribute("pokemon", pokemon);
+		return "PokemonAgregar";
+	}
+	
+	@PostMapping("/pokemones/agregar")
+	public String agregarPokemonPost(PokemonBase pokemon) {
+		String imagen = pokemon.getImagen();
+		if(imagen == null || imagen.trim().isEmpty())
+			pokemon.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png");
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones";
+	}
+	
+	@GetMapping("/pokemones/{id}/editar")
+	public String editarGet(Pokemon pokemon, Model model) {
+		pokemon = pokemonService.buscar(pokemon);
+		model.addAttribute("pokemon", pokemon);
+		return "PokemonEditar";
+	}
+	
+	@PostMapping("/pokemones/{id}/editar")
+	public String editarPost(Pokemon pokemon) {
+		String nombre = pokemon.getNombre();
+		String descripcion = pokemon.getDescripcion();
+		int nivelRequerido = pokemon.getNivelRequerido();
+		pokemon = pokemonService.buscar(pokemon);
+		pokemon.editarDatos(nombre, descripcion, nivelRequerido);
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones/{id}";
+	}
+	
+	@GetMapping("/pokemones/{id}/habilidades/agregar")
 	public String agregarHabilidadGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
 		RepositorioHabilidades.setHabilidades(habilidadService.obtener());
@@ -85,7 +130,7 @@ public class Controlador {
 		return "HabilidadAgregar";
 	}
 	
-	@PostMapping("/pokemones/{id}/agregarHabilidad")
+	@PostMapping("/pokemones/{id}/habilidades/agregar")
 	public String agregarHabilidadPost(Pokemon pokemon, int habilidadId) {
 		pokemon = pokemonService.buscar(pokemon);
 		Habilidad habilidad = new Habilidad(habilidadId);
@@ -95,24 +140,7 @@ public class Controlador {
 		return "redirect:/pokemones/{id}";
 	}
 	
-	@GetMapping("/pokemones/{id}/eliminarHabilidad")
-	public String eliminarHabilidadGet(Pokemon pokemon, Model model) {
-		pokemon = pokemonService.buscar(pokemon);
-		model.addAttribute("pokemon", pokemon);
-		return "HabilidadEliminar";
-	}
-	
-	@PostMapping("/pokemones/{id}/eliminarHabilidad")
-	public String eliminarHabilidadPost(Pokemon pokemon, int habilidadId) {
-		pokemon = pokemonService.buscar(pokemon);
-		Habilidad habilidad = new Habilidad(habilidadId);
-		habilidad = habilidadService.buscar(habilidad);
-		pokemon.quitarHabilidad(habilidad);
-		pokemonService.guardar(pokemon);
-		return "redirect:/pokemones/{id}";
-	}
-	
-	@GetMapping("/pokemones/{id}/agregarTipo")
+	@GetMapping("/pokemones/{id}/tipos/agregar")
 	public String agregarTipoGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
 		RepositorioTipos.setTipos(tipoService.obtener());
@@ -121,7 +149,7 @@ public class Controlador {
 		return "TipoAgregar";
 	}
 	
-	@PostMapping("/pokemones/{id}/agregarTipo")
+	@PostMapping("/pokemones/{id}/tipos/agregar")
 	public String agregarTipoPost(Pokemon pokemon, int tipoId) {
 		pokemon = pokemonService.buscar(pokemon);
 		Tipo tipo = new Tipo(tipoId);
@@ -131,14 +159,46 @@ public class Controlador {
 		return "redirect:/pokemones/{id}";
 	}
 	
-	@GetMapping("/pokemones/{id}/eliminarTipo")
+	@GetMapping("/pokemones/{id}/evoluciones/agregar")
+	public String agregarEvolucionGet(Pokemon pokemon, PokemonEvolucion evolucion, Model model) {
+		model.addAttribute("pokemon", pokemon);
+		model.addAttribute("evolucion", evolucion);
+		return "EvolucionAgregar";
+	}
+	
+	@PostMapping("/pokemones/{id}/evoluciones/agregar")
+	public String agregarEvolucionPost(Pokemon pokemon, PokemonEvolucion evolucion) {
+		pokemon = pokemonService.buscar(pokemon);
+		pokemon.agregarEvolucion(evolucion);	
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones/{id}";
+	}
+		
+	@GetMapping("/pokemones/{id}/habilidades/eliminar")
+	public String eliminarHabilidadGet(Pokemon pokemon, Model model) {
+		pokemon = pokemonService.buscar(pokemon);
+		model.addAttribute("pokemon", pokemon);
+		return "HabilidadEliminar";
+	}
+	
+	@PostMapping("/pokemones/{id}/habilidades/eliminar")
+	public String eliminarHabilidadPost(Pokemon pokemon, int habilidadId) {
+		pokemon = pokemonService.buscar(pokemon);
+		Habilidad habilidad = new Habilidad(habilidadId);
+		habilidad = habilidadService.buscar(habilidad);
+		pokemon.quitarHabilidad(habilidad);
+		pokemonService.guardar(pokemon);
+		return "redirect:/pokemones/{id}";
+	}
+	
+	@GetMapping("/pokemones/{id}/tipos/eliminar")
 	public String eliminarTipoGet(Pokemon pokemon, Model model) {
 		pokemon = pokemonService.buscar(pokemon);
 		model.addAttribute("pokemon", pokemon);
 		return "TipoEliminar";
 	}
 	
-	@PostMapping("/pokemones/{id}/eliminarTipo")
+	@PostMapping("/pokemones/{id}/tipos/eliminar")
 	public String eliminarTipoPost(Pokemon pokemon, int tipoId) {
 		pokemon = pokemonService.buscar(pokemon);
 		Tipo tipo = new Tipo(tipoId);
@@ -147,34 +207,7 @@ public class Controlador {
 		pokemonService.guardar(pokemon);
 		return "redirect:/pokemones/{id}";
 	}
-	
-	@GetMapping("/pokemones/{id}/agregarEvolucion")
-	public String agregarEvolucionGet(Pokemon pokemon, PokemonEvolucion evolucion, Model model) {
-		model.addAttribute("pokemon", pokemon);
-		model.addAttribute("evolucion", evolucion);
-		return "EvolucionAgregar";
-	}
-	
-	@PostMapping("/pokemones/{id}/agregarEvolucion")
-	public String agregarEvolucionPost(Pokemon pokemon, PokemonEvolucion evolucion) {
-		pokemon = pokemonService.buscar(pokemon);
-		pokemon.agregarEvolucion(evolucion);	
-		pokemonService.guardar(pokemon);
-		return "redirect:/pokemones/{id}";
-	}
-	
-	@GetMapping("/pokemones/agregar")
-	public String agregarPokemonGet(PokemonBase pokemon, Model model) {
-		model.addAttribute("pokemon", pokemon);
-		return "PokemonAgregar";
-	}
-	
-	@PostMapping("/pokemones/agregar")
-	public String agregarPokemonPost(PokemonBase pokemon) {
-		pokemonService.guardar(pokemon);
-		return "redirect:/pokemones";
-	}
-	
+
 	@GetMapping("/ejemplares")
 	public String ejemplaresGet(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();	
@@ -201,35 +234,5 @@ public class Controlador {
 		Ejemplar ejemplar = new Ejemplar(pokemon, usuario, nivelActual);
 		ejemplarService.guardar(ejemplar);
 		return "redirect:/ejemplares";
-	}
-	
-	@GetMapping("/pokemones/{id}/editar")
-	public String editarGet(Pokemon pokemon, Model model) {
-		pokemon = pokemonService.buscar(pokemon);
-		model.addAttribute("pokemon", pokemon);
-		return "PokemonEditar";
-	}
-	
-	@PostMapping("/pokemones/{id}/editar")
-	public String editarPost(Pokemon pokemon) {
-		String nombre = pokemon.getNombre();
-		String descripcion = pokemon.getDescripcion();
-		int nivelRequerido = pokemon.getNivelRequerido();
-		pokemon = pokemonService.buscar(pokemon);
-		pokemon.editarDatos(nombre, descripcion, nivelRequerido);
-		pokemonService.guardar(pokemon);
-		return "redirect:/pokemones/{id}";
-	}
-	
-	@GetMapping("/registro")
-	public String registroGet(Usuario usuario, Model model) {
-		model.addAttribute("usuario", usuario);
-		return "Registro";
-	}
-	
-	@PostMapping("/registro")
-	public String registroPost(Usuario usuario) {
-		usuarioService.guardar(usuario);
-		return "redirect:/login";
 	}
 }

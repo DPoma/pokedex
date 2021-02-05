@@ -18,7 +18,7 @@
 	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 	<h1 class="title">AGREGAR EJEMPLAR</h1>
-	<h2>Por favor, seleccione un pokemon.</h2>
+	<label class="title">Pokemon</label>
 	<form class="form" th:action="@{/ejemplares/agregar}" method="POST">	
 		<select th:object="${pokemon}"class="select" name="id" required>
 			<option value="" selected="true" disabled>Seleccione un pokemon</option>

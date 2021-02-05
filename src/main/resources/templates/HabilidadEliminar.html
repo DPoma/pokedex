@@ -18,8 +18,8 @@
 	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 		<h1 class="title">ELIMINAR HABILIDAD</h1>
-		<h2>Por favor, seleccione una habilidad para eliminar.</h2>
-		<form th:object="${habilidadId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/eliminarHabilidad}" method="POST">
+		<label class="title">Habilidad</label>
+		<form th:object="${habilidadId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/habilidades/eliminar}" method="POST">
 			<select class="select" name="habilidadId" required>
 				<option value="" selected="true" disabled>Seleccione una habilidad</option>
 				<option th:each="habilidad : ${pokemon.habilidades}" th:text=${habilidad.nombre} th:value="${habilidad.id}"></option>

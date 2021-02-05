@@ -15,7 +15,7 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
 public class FileHandler {
-
+	
 	public static void extraerDatos() throws CsvValidationException {
 		leerHabilidades("./src/main/resources/static/Habilidades.csv");
 		leerTipos("./src/main/resources/static/Tipos.csv");

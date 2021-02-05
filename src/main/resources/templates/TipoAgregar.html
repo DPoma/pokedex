@@ -18,8 +18,8 @@
 	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
 		<h1 class="title">AGREGAR TIPO</h1>
-		<h2>Por favor, seleccione un tipo para agregar.</h2>
-		<form th:object="${tipoId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/agregarTipo}" method="POST">
+		<label class="title">Tipo</label>
+		<form th:object="${tipoId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/tipos/agregar}" method="POST">
 			<select class="select" name="tipoId" required>
 				<option value="" selected="true" disabled>Seleccione un tipo</option>
 				<option th:each="tipo : ${tipos}" th:text=${tipo.nombre} th:value="${tipo.id}"></option>

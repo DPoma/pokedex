@@ -18,7 +18,6 @@
 		<header th:replace="layout :: header"></header>
 		<nav th:replace="layout :: navbar"></nav>
 		<h1 class="title">AGREGAR POKEMON</h1>
-		<h2>Por favor, complete los siguientes datos.</h2>
 		<form class="form" th:object="${pokemon}" th:action="@{/pokemones/agregar}" method="POST">		
 			<label class="title" for="nombre">Nombre</label>		
 			<input class="input" name="nombre" type="text" th:text="${pokemon.nombre}" required>

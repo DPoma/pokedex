@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.certant.pokedex.handlers.DataAccessObject;
 import com.certant.pokedex.handlers.FileHandler;
 import com.certant.pokedex.model.Habilidad;
 import com.certant.pokedex.model.Pokemon;
@@ -20,7 +19,7 @@ public class PokemonTest {
 	@BeforeAll
 	public static void cargarDatos() throws CsvValidationException {
 		FileHandler.extraerDatos();
-		DataAccessObject.persistirDatosTest();
+		//DataAccessObject.persistirDatosTest();
 		//DataAccessObject.obtenerPokemones();
 	}
 	
@@ -88,7 +87,7 @@ public class PokemonTest {
 	@Test
 	public void nuevoPokemonDebeSerPersistidoYObtenidoTest() {
 		Pokemon pikachu = new Pokemon("Pikachu", "Es amarillo", 1);
-		DataAccessObject.persistirElementoTest(pikachu);
+		//DataAccessObject.persistirElementoTest(pikachu);
 		//DataAccessObject.obtenerPokemones();
 		assertTrue(RepositorioPokemones.existe("Pikachu"));
 	}
@@ -102,7 +101,7 @@ public class PokemonTest {
 		geodude.setNivelRequerido(20);
 		geodude.agregarTipo(veneno);
 		geodude.agregarHabilidad(vistaLince);
-		DataAccessObject.persistirElementoTest(geodude);
+		//DataAccessObject.persistirElementoTest(geodude);
 		//DataAccessObject.obtenerPokemones();
 		Pokemon geodudeVenenoso = RepositorioPokemones.buscar("GeodudeVenenoso");
 		assertEquals("GeodudeVenenoso", geodudeVenenoso.getNombre());
