@@ -17,8 +17,7 @@
 	<header th:replace="layout :: header"></header>
 	<nav th:replace="layout :: navbar"></nav>
 	<section class="section">
-		<h1 class="title">¡Bienvenido!</h1>
-		<h1 class="title" th:text="${username}"></h1>
+		<h1 class="title" th:text="${'¡Bienvenido ' + username + '!'}"></h1>
     	<img class="home__logo" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
 		<h2>¡Buscá información de los pokemones que desees y registrá los nuevos que vayas encontrando!</h2>
 	</section>

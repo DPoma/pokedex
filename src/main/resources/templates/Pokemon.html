@@ -25,7 +25,7 @@
 		<div class="pokemon__info">
 			<h2 class="pokemon__info-name" th:text="${pokemon.nombre}"></h2>
 			<h3 class="pokemon__info-desc" th:text="${pokemon.descripcion}"></h3>
-			<h3 th:text="@{Nivel Requerido: } + ${pokemon.nivelRequerido}"></h3>
+			<h3 th:text="${'Nivel Requerido: ' + pokemon.nivelRequerido}"></h3>
 			<a th:href="@{/pokemones/} + ${pokemon.id} + @{/editar}">
 				<input class="button" type="button" value="Editar Datos">
 			</a>
