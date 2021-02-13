@@ -6,5 +6,5 @@ import com.certant.pokedex.model.Usuario;
 
 public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
 	
-	Usuario findByUsername(String username);
+	public abstract Usuario findByUsername(String username);
 }

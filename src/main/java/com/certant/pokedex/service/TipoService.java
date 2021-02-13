@@ -1,42 +1,50 @@
 package com.certant.pokedex.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.certant.pokedex.dao.TipoDAO;
+import com.certant.pokedex.model.Pokemon;
 import com.certant.pokedex.model.Tipo;
 
 @Service
-public class TipoService implements ITipoService {
+public class TipoService {
 
 	@Autowired
 	private TipoDAO tipoDAO;
 	
-	@Override
 	@Transactional(readOnly = true)
-	public List<Tipo> obtener() {
+	public List<Tipo> obtenerTodos() {
 		return (List<Tipo>)tipoDAO.findAll();
 	}
-
-	@Override
+	
+	@Transactional(readOnly = true)
+	public List<Tipo> disponiblesPara(Pokemon pokemon) {
+		return obtenerTodos().stream().filter(tipo -> !pokemon.esTipo(tipo)).collect(Collectors.toList());
+	}
+	
 	@Transactional
 	public void guardar(Tipo tipo) {
 		tipoDAO.save(tipo);
 		
 	}
 
-	@Override
 	@Transactional
 	public void eliminar(Tipo tipo) {
 		tipoDAO.delete(tipo);
 	}
 
-	@Override
 	@Transactional(readOnly = true)
-	public Tipo buscar(Tipo tipo) {
-		return tipoDAO.findById(tipo.getId()).orElse(null);
+	public Tipo buscarPorId(int id) {
+		return tipoDAO.findById(id).orElse(null);
+	}
+	
+	@Transactional(readOnly = true)
+	public Tipo buscarPorNombre(String nombre) {
+		return tipoDAO.findByNombre(nombre);
 	}
 }

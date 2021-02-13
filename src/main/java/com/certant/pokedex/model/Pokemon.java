@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.certant.pokedex.handlers.ListHandler;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Pokemones")
@@ -15,6 +15,7 @@ import com.certant.pokedex.handlers.ListHandler;
 public class Pokemon implements Serializable{
 	
     private static final long serialVersionUID = 1L;
+    
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -27,28 +28,29 @@ public class Pokemon implements Serializable{
 	
 	private String imagen;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Pokemones_Tipos", 
-	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
-	inverseJoinColumns = {@JoinColumn(name = "Tipo_Id")})
-	private List<Tipo> tipos;
-	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Pokemones_Habilidades", 
 	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
 	inverseJoinColumns = {@JoinColumn(name = "Habilidad_Id")})
-	private List<Habilidad> habilidades;
+	private List<Habilidad> habilidades = new ArrayList<Habilidad>();
+	
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Pokemones_Tipos", 
+	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
+	inverseJoinColumns = {@JoinColumn(name = "Tipo_Id")})
+	private List<Tipo> tipos = new ArrayList<Tipo>();
 	
 	public Pokemon() {
 		
 	}
 	
-	public Pokemon(String nombre, String descripcion, int nivelRequerido) {
+	public Pokemon(String nombre, String descripcion, int nivelRequerido, String imagen) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.nivelRequerido = nivelRequerido;
-		this.tipos = new ArrayList<Tipo>();
-		this.habilidades = new ArrayList<Habilidad>();
+		this.imagen = imagen;
 	}
 
 	public int getId() {
@@ -105,68 +107,84 @@ public class Pokemon implements Serializable{
 		this.habilidades = habilidades;
 	}
 	
-	public boolean tieneEsaHabilidad(Habilidad habilidad) {
-		return ListHandler.cumpleCondicionElemento(habilidades, habilidadDelPokemon-> 
-		habilidadDelPokemon.getNombre()
-		.equals(habilidad.getNombre()));
-	}
-	
-	public boolean esTipo(Tipo tipo) {
-		return ListHandler.cumpleCondicionElemento(tipos, tipoDelPokemon -> 
-		tipoDelPokemon.getNombre()
-		.equals(tipo.getNombre()));
-	}
-	
-	public List<?> obtenerEvoluciones() {
-		if(this instanceof PokemonBase)
-			return ((PokemonBase)this).getEvoluciones();	
-		else
-			return ((PokemonEvolucion)this).getPokemonBase().getEvoluciones();
-	}
-	
-	public Habilidad buscarHabilidad(String nombre) {
-		return ListHandler.buscarElemento(habilidades, habilidad -> habilidad.getNombre().equals(nombre));
-	}
-	
-	public Tipo buscarTipo(String nombre) {
-		return ListHandler.buscarElemento(tipos, tipo -> tipo.getNombre().equals(nombre));
-	}
-	
 	public void agregarHabilidad(Habilidad habilidad) {
-		this.habilidades.add(habilidad);
+		habilidades.add(habilidad);
 	}
 	
-	public void quitarHabilidad(Habilidad habilidad) {
-		this.habilidades.remove(this.buscarHabilidad(habilidad.getNombre()));
+	public void eliminarHabilidad(Habilidad habilidad) {
+		habilidades.remove(habilidad);
 	}
 	
 	public void agregarTipo(Tipo tipo) {
-		this.tipos.add(tipo);
+		tipos.add(tipo);
 	}
 	
-	public void quitarTipo(Tipo tipo) {
-		this.tipos.remove(this.buscarTipo(tipo.getNombre()));
+	public void eliminarTipo(Tipo tipo) {
+		tipos.remove(tipo);
 	}
 	
-	public void editarDatos(String nombre, String descripcion, int nivel) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.nivelRequerido = nivel;
+	public boolean tieneHabilidad(Habilidad habilidad) {
+		return habilidades.contains(habilidad);
 	}
 	
-	public boolean estaDisponible() {
-		return false;
+	public boolean esTipo(Tipo tipo) {
+		return tipos.contains(tipo);
 	}
-
+	
+	public List<?> obtenerEvoluciones() {
+		return null;
+	}
+	
 	public void agregarEvolucion(Pokemon pokemon) {
 		
 	}
-
-	public boolean tieneEsaEvolucion(String nombre) {
+		
+	public boolean esEvolucionDisponible() {
 		return false;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
+		result = prime * result + nivelRequerido;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pokemon other = (Pokemon) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (id != other.id)
+			return false;
+		if (imagen == null) {
+			if (other.imagen != null)
+				return false;
+		} else if (!imagen.equals(other.imagen))
+			return false;
+		if (nivelRequerido != other.nivelRequerido)
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 	
-	public Pokemon buscarEvolucion(String nombre) {
-		return null;
-	}	
+	
 }

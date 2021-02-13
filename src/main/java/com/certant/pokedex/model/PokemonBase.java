@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.certant.pokedex.handlers.ListHandler;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue("SI")
@@ -14,16 +14,16 @@ public class PokemonBase extends Pokemon implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
+    @JsonIgnore
 	@OneToMany(mappedBy = "pokemonBase", cascade = CascadeType.ALL)
-	private List<PokemonEvolucion> evoluciones;
+	private List<PokemonEvolucion> evoluciones = new ArrayList<PokemonEvolucion>();
 	
 	public PokemonBase() {
-		this.evoluciones = new ArrayList<PokemonEvolucion>();
+		
 	}
 	
-	public PokemonBase(String nombre, String descripcion, int nivel) {
-		super(nombre, descripcion, nivel);
-		this.evoluciones = new ArrayList<PokemonEvolucion>();
+	public PokemonBase(String nombre, String descripcion, int nivel, String imagen) {
+		super(nombre, descripcion, nivel, imagen);		
 	}
 
 	public List<PokemonEvolucion> getEvoluciones() {
@@ -35,20 +35,14 @@ public class PokemonBase extends Pokemon implements Serializable {
 	}
 	
 	@Override
+	public List<PokemonEvolucion> obtenerEvoluciones() {
+		return evoluciones;
+	}
+	
+	@Override
 	public void agregarEvolucion(Pokemon pokemon) {
-		((PokemonEvolucion)pokemon).setPokemonBase(this);
-		evoluciones.add((PokemonEvolucion)pokemon);
-	}
-	
-	@Override
-	public boolean tieneEsaEvolucion(String nombrePokemon) {
-		return ListHandler.cumpleCondicionElemento(evoluciones, 
-				evolucion -> evolucion.getNombre().equals(nombrePokemon));
-	}
-	
-	@Override
-	public Pokemon buscarEvolucion(String nombrePokemon) {
-		return ListHandler.buscarElemento(evoluciones, 
-				evolucion -> evolucion.getNombre().equals(nombrePokemon));
+		PokemonEvolucion evolucion = (PokemonEvolucion)pokemon;
+		evolucion.setPokemonBase(this);
+		evoluciones.add(evolucion);
 	}
 }

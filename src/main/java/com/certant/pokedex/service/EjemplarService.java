@@ -1,6 +1,7 @@
 package com.certant.pokedex.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,35 +9,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.certant.pokedex.dao.EjemplarDAO;
 import com.certant.pokedex.model.Ejemplar;
+import com.certant.pokedex.model.Usuario;
 
 @Service
-public class EjemplarService implements IEjemplarService {
+public class EjemplarService {
 
 	@Autowired
 	private EjemplarDAO ejemplarDAO;
 	
-	@Override
 	@Transactional(readOnly = true)
-	public List<Ejemplar> obtener() {
+	public List<Ejemplar> obtenerTodos() {
 		return (List<Ejemplar>)ejemplarDAO.findAll();
 	}
-
-	@Override
-	@Transactional
-	public void guardar(Ejemplar ejemplar) {
-		ejemplarDAO.save(ejemplar);
-		
+	
+	public List<Ejemplar> obtenerDeUsuario(Usuario usuario) {
+		return obtenerTodos().stream().filter(ejemplar -> ejemplar.getUsuario().equals(usuario)).collect(Collectors.toList());
 	}
 
-	@Override
+	@Transactional
+	public void guardar(Ejemplar ejemplar) {
+		ejemplarDAO.save(ejemplar);	
+	}
+
 	@Transactional
 	public void eliminar(Ejemplar ejemplar) {
 		ejemplarDAO.delete(ejemplar);
 	}
 
-	@Override
 	@Transactional(readOnly = true)
-	public Ejemplar buscar(Ejemplar ejemplar) {
-		return ejemplarDAO.findById(ejemplar.getId()).orElse(null);
+	public Ejemplar buscarPorId(int id) {
+		return ejemplarDAO.findById(id).orElse(null);
 	}
 }

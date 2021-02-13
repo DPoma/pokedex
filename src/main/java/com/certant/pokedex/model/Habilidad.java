@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Habilidades")
 public class Habilidad implements Serializable {
@@ -18,6 +20,7 @@ public class Habilidad implements Serializable {
 	
 	private String descripcion;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="habilidades")
 	private List<Pokemon> pokemones;
 	
@@ -64,5 +67,44 @@ public class Habilidad implements Serializable {
 
 	public void setPokemones(List<Pokemon> pokemones) {
 		this.pokemones = pokemones;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Habilidad other = (Habilidad) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (id != other.id)
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (pokemones == null) {
+			if (other.pokemones != null)
+				return false;
+		} else if (!pokemones.equals(other.pokemones))
+			return false;
+		return true;
 	}	
 }
