@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registro - Pokedex</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body class="body">
+	<header th:replace="layout :: header"></header>
+	<section class="section">
+	<form class="form" th:object="${usuario}" th:action="@{/registro}" method="POST">
+		<h1 class="title">CREA TU CUENTA</h1>
+		<label class="title" for="username">Usuario</label>
+		<input class="input" type="text" name="username" th:text="${usuario.username}" required autofocus>
+		<label class="title" for="password">Contraseña</label>
+		<input class="input" type="password" name="password" th:text="${usuario.username}" required>
+			<input class="button" type="submit" value="Registrarse">
+		</form>
+	</section>
+	<header th:replace="layout :: footer"></header>
+</body>
+</html>

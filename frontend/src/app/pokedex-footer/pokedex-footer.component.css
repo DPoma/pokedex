@@ -1,0 +1,20 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.footer {
+ 	text-align: center;
+}
+
+.footer__logo {
+	filter: invert(100%);
+	width: 12em;
+	margin: 2em 0;
+}
+
+.footer__logo:hover {
+  transition: all 0.3s ease;
+  width: 12.5em;
+}

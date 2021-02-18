@@ -1,0 +1,49 @@
+<app-pokedex-header></app-pokedex-header>
+<section class="container">
+
+  <img class="pokemon__img" src={{pokemon?.imagen}}>
+
+  <div class="pokemon__info">
+    <h2 class="pokemon__info-name">{{pokemon?.nombre}}</h2>
+    <h3 class="pokemon__info-desc">{{pokemon?.descripcion}}</h3>
+    <h3>{{'Nivel Requerido: ' + pokemon?.nivelRequerido}}</h3>
+    <input [routerLink]="['/','pokemones',pokemon?.id,'editar']" class="button" type="button" value="Editar Datos">
+  </div>
+
+  <div class="pokemon__skill">
+    <h2 class="pokemon__skill-title">HABILIDADES</h2>
+    <div class="pokemon__skill-list" *ngFor="let habilidad of pokemon?.habilidades">
+      <h3 class="pokemon__skill-list-name">{{habilidad.nombre}}</h3>
+      <h3 class="pokemon__skill-list-desc">{{habilidad.descripcion}}</h3>
+    </div>
+    <div class="pokemon__div-button">
+      <input [routerLink]="['/','pokemones',pokemon?.id,'habilidades','agregar']" class="pokemon__button-green" type="button"
+        value="Agregar Habilidad">
+      <input [routerLink]="['/','pokemones',pokemon?.id,'habilidades','eliminar']" class="pokemon__button-red" type="button"
+        value="Eliminar Habilidad">
+    </div>
+  </div>
+
+  <div class="pokemon__type">
+    <h2 class="pokemon__type-title">TIPOS</h2>
+    <h3 class="pokemon__type-name" *ngFor="let tipo of pokemon?.tipos">{{tipo.nombre}}</h3>
+    <input [routerLink]="['/','pokemones',pokemon?.id,'tipos','agregar']" class="pokemon__button-green" type="button"
+      value="Agregar Tipo">
+    <input [routerLink]="['/','pokemones',pokemon?.id,'tipos','eliminar']" class="pokemon__button-red" type="button"
+      value="Eliminar Tipo">
+  </div>
+
+  <div class="pokemon__evolution">
+    <h2 class="pokemon__evolution-title">EVOLUCIONES</h2>
+    <div class="pokemon__evolution-list">
+      <div class="pokemon__evolution-list-element" *ngFor="let evolucion of pokemon?.evoluciones">
+        <img class="pokemon__evolution-list-element-img" src="{{evolucion.imagen}}">
+        <h3>{{evolucion.nombre}}</h3>
+        <h3>{{evolucion.nivelRequerido}}</h3>
+      </div>
+    </div>
+      <input [routerLink]="['/','pokemones',pokemon?.id,'evoluciones','agregar']" class="button" type="button" value="Agregar Evolucion">
+  </div>
+</section>
+<app-pokedex-logout></app-pokedex-logout>
+<app-pokedex-footer></app-pokedex-footer>

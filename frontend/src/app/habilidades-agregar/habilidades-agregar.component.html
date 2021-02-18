@@ -1,0 +1,14 @@
+<app-pokedex-header></app-pokedex-header>
+<section class="container">
+  <h1 class="title">AGREGAR HABILIDAD</h1>
+  <label class="title">Habilidad</label>
+  <form [formGroup]="form" (submit)="agregarHabilidad()" class="form">
+    <select class="select" formControlName="habilidadId">
+      <option value="" selected="true" disabled>Seleccione una habilidad</option>
+      <option *ngFor="let habilidad of habilidades" value="{{habilidad.id}}">{{habilidad.nombre}}</option>
+    </select>
+    <button class="button" [disabled]="form.invalid">Guardar</button>
+  </form>
+</section>
+<app-pokedex-logout></app-pokedex-logout>
+<app-pokedex-footer></app-pokedex-footer>

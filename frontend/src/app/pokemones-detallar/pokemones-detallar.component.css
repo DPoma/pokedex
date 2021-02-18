@@ -1,0 +1,131 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	background-color: #ced6e0;
+	font-family:'Montserrat', sans-serif;
+	font-size: 16px;
+  text-align: center;
+}
+
+.title {
+	font-weight: bold;
+	padding: 1em;
+	margin: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.section {
+	text-align: center;
+}
+
+.pokemon__img {
+	width: 25em;
+}
+
+.pokemon__info, .pokemon__skill, .pokemon__type, .pokemon__evolution {
+	box-shadow: 0 0 15px #000;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #a4b0be;
+	width: 80%;
+	margin: 5em auto;
+}
+
+.pokemon__button-green {
+	margin: 2em;
+	font-weight: bold;
+	padding: 1em;
+	border-radius: 10px;
+	border: none;
+	background-color: green;
+	color: #FFF;
+}
+
+.pokemon__button-red {
+	margin: 2em;
+	font-weight: bold;
+	padding: 1em;
+	border-radius: 10px;
+	border: none;
+	background-color: red;
+	color: #FFF;
+}
+
+.pokemon__div-button {
+	display: flex;
+	justify-content: center;
+}
+
+.pokemon__skill-title, .pokemon__type-title, .pokemon__evolution-title {
+	border-radius: 10px;
+	padding: 15px 0;
+	background-color: #0275d8;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.pokemon__info-name {
+	padding: 1em 0;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.pokemon__info-desc {
+	width: 80%;
+	margin: auto;
+	padding: 0 0 1em 0;
+}
+
+.pokemon__skill-list {
+	margin: 1em 0;
+}
+
+.pokemon__skill-list-name {
+	font-weight: bold;
+}
+
+.pokemon__skill-list-desc {
+	border-bottom: 1px solid #000;
+	padding: 15px 0;
+}
+
+.pokemon__type-name {
+	margin: 1em 0;
+	font-weight: bold;
+}
+
+.pokemon__evolution-list {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.pokemon__evolution-list-element {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 3em;
+}
+
+.pokemon__evolution-list-element-img {
+	width: 10em;
+	padding-top: 1em;
+}
+
+.button {
+	margin: 4em auto;
+	width: 40%;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 1em;
+	border-radius: 10px;
+	border: none;
+	background-color: #0275d8;
+	color: #FFF;
+}

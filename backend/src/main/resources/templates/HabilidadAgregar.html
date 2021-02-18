@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Agregar Habilidad - Pokedex</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Dario Poma">
+	<meta name="keywords" content="Pokedex, Certant, Pokemon">
+	<meta name="description" content="Pokedex">
+	<meta name="copyright" content="Certant">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body class="body">
+	<header th:replace="layout :: header"></header>
+	<nav th:replace="layout :: navbar"></nav>
+	<section class="section">
+		<h1 class="title">AGREGAR HABILIDAD</h1>
+		<label class="title">Habilidad</label>
+		<form th:object="${habilidadId}" th:action="@{/pokemones/} + ${pokemon.id} + @{/habilidades/agregar}" method="POST">
+			<select class="select" name="habilidadId" required>
+				<option value="" selected="true" disabled>Seleccione una habilidad</option>
+				<option th:each="habilidad : ${habilidades}" th:text=${habilidad.nombre} th:value="${habilidad.id}"></option>
+			</select> 
+			<input class="button" type="submit" value="Guardar">
+		</form>
+	</section>
+	<form th:replace="layout :: logout"></form>
+	<header th:replace="layout :: footer"></header>
+</body>
+</html>
