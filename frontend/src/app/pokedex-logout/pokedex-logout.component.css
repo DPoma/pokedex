@@ -1,0 +1,21 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button__logout {
+	margin: 4em auto;
+	font-weight: bold;
+	padding: 1em;
+	border-radius: 10px;
+	border: none;
+	background-color: red;
+	color: #FFF;
+}

@@ -1,0 +1,14 @@
+<app-pokedex-header></app-pokedex-header>
+<section class="container">
+		<h1 class="title">AGREGAR TIPO</h1>
+		<label class="title">Tipo</label>
+		<form [formGroup]="form" (submit)="agregarTipo()" class="form">
+			<select class="select" formControlName="tipoId">
+				<option value="" selected="true" disabled>Seleccione un tipo</option>
+				<option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.nombre}}</option>
+			</select>
+			<button class="button" [disabled]="form.invalid">Guardar</button>
+		</form>
+</section>
+<app-pokedex-logout></app-pokedex-logout>
+<app-pokedex-footer></app-pokedex-footer>
