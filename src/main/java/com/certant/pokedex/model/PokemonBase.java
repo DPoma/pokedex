@@ -6,15 +6,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @DiscriminatorValue("SI")
 public class PokemonBase extends Pokemon implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
-    @JsonIgnore
 	@OneToMany(mappedBy = "pokemonBase", cascade = CascadeType.ALL)
 	private List<PokemonEvolucion> evoluciones = new ArrayList<PokemonEvolucion>();
 	

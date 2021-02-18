@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.certant.pokedex.model.Pokemon;
@@ -15,6 +16,7 @@ import com.certant.pokedex.model.Pokemon;
 import com.certant.pokedex.service.PokemonService;
 
 @RestController
+@RequestMapping("/api")
 public class PokemonController {
 	
 	@Autowired
@@ -25,16 +27,10 @@ public class PokemonController {
 		return pokemonService.obtenerTodos();
 	}
 	
-	@PostMapping("/pokemones")
+	@PostMapping("/pokemones/agregar")
 	public Pokemon agregarPokemon(@RequestBody Pokemon pokemon) {
 		if(pokemon.getImagen() == null || pokemon.getImagen().trim().isEmpty())
 			pokemon.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png");
-		pokemonService.guardar(pokemon);
-		return pokemon;
-	}
-	
-	@PutMapping("/pokemones")
-	public Pokemon editarPost(Pokemon pokemon) {
 		pokemonService.guardar(pokemon);
 		return pokemon;
 	}
@@ -45,12 +41,29 @@ public class PokemonController {
 		return pokemon;
 	}
 	
-	@GetMapping("/pokemones/evoluciones")
-	public List<Pokemon> agregarEvolucionGet() {
+	@GetMapping("/pokemones/{pokemonId}/editar")
+	public Pokemon editarPokemonGet(@PathVariable int pokemonId) {
+		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
+		pokemonService.guardar(pokemon);
+		return pokemon;
+	}
+	
+	@PutMapping("/pokemones/{pokemonId}/editar")
+	public Pokemon editarPokemonPut(@PathVariable int pokemonId, @RequestBody Pokemon pokemonJSON) {
+		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
+		pokemon.setNombre(pokemonJSON.getNombre());
+		pokemon.setDescripcion(pokemonJSON.getDescripcion());
+		pokemon.setNivelRequerido(pokemonJSON.getNivelRequerido());
+		pokemonService.guardar(pokemon);
+		return pokemon;
+	}
+	
+	@GetMapping("/pokemones/{pokemonId}/evoluciones/agregar")
+	public List<Pokemon> agregarEvolucionGet(@PathVariable int pokemonId) {
 		return pokemonService.obtenerEvolucionesDisponibles();
 	}
 	
-	@PostMapping("/pokemones/{pokemonId}/evoluciones")
+	@PostMapping("/pokemones/{pokemonId}/evoluciones/agregar")
 	public Pokemon agregarEvolucionPost(@PathVariable int pokemonId, @RequestBody Pokemon evolucion) {
 		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
 		pokemon.agregarEvolucion(evolucion);	

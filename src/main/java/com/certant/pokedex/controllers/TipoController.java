@@ -3,11 +3,11 @@ package com.certant.pokedex.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.certant.pokedex.model.Pokemon;
@@ -16,6 +16,7 @@ import com.certant.pokedex.service.PokemonService;
 import com.certant.pokedex.service.TipoService;
 
 @RestController
+@RequestMapping("/api")
 public class TipoController {
 	
 	@Autowired
@@ -31,9 +32,9 @@ public class TipoController {
 	}
 	
 	@PostMapping("/pokemones/{pokemonId}/tipos/agregar")
-	public Pokemon agregarHabilidadPost(@PathVariable int pokemonId, @RequestParam int tipoId) {
+	public Pokemon agregarHabilidadPost(@PathVariable int pokemonId, @RequestBody Tipo tipoJSON) {
 		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
-		Tipo tipo = tipoService.buscarPorId(tipoId);
+		Tipo tipo = tipoService.buscarPorId(tipoJSON.getId());
 		pokemon.agregarTipo(tipo);
 		pokemonService.guardar(pokemon);
 		return pokemon;
@@ -45,10 +46,10 @@ public class TipoController {
 		return pokemon.getTipos();
 	}
 		
-	@DeleteMapping("/pokemones/{pokemonId}/tipos/eliminar")
-	public Pokemon eliminarHabilidadPost(@PathVariable int pokemonId, @RequestParam int tipoId) {
+	@PostMapping("/pokemones/{pokemonId}/tipos/eliminar")
+	public Pokemon eliminarHabilidadPost(@PathVariable int pokemonId, @RequestBody Tipo tipoJSON) {
 		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
-		Tipo tipo = tipoService.buscarPorId(tipoId);
+		Tipo tipo = tipoService.buscarPorId(tipoJSON.getId());
 		pokemon.eliminarTipo(tipo);
 		pokemonService.guardar(pokemon);
 		return pokemon;

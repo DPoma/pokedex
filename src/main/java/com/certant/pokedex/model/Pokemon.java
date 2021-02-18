@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "Pokemones")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -28,14 +26,12 @@ public class Pokemon implements Serializable{
 	
 	private String imagen;
 	
-	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Pokemones_Habilidades", 
 	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
 	inverseJoinColumns = {@JoinColumn(name = "Habilidad_Id")})
 	private List<Habilidad> habilidades = new ArrayList<Habilidad>();
 	
-	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Pokemones_Tipos", 
 	joinColumns = {@JoinColumn(name = "Pokemon_Id")}, 
