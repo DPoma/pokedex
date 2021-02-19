@@ -37,6 +37,7 @@ export class HabilidadesEliminarComponent implements OnInit {
     {
       id: this.form.value.habilidadId
     }).subscribe();
+    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
   }
 
 }

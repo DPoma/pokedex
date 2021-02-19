@@ -6,6 +6,7 @@
 
 .header {
  	text-align: center;
+  background-color: #ced6e0;
 }
 
 .header__logo {
@@ -18,7 +19,6 @@
 	display: flex;
 	justify-content: space-around;
 	border-radius: 10px;
-	margin-bottom: 1em;
 }
 
 .navbar__item {
@@ -28,19 +28,18 @@
 	text-decoration: none;
 	padding: 1em;
 	font-weight: bold;
+  outline: none;
+  border: none;
+  font-family:'Montserrat', sans-serif;
 }
 
-.navbar__item:active {
+.navbar__item:active, .navbar__item:hover, .navbar__item:visited {
 	color: white;
 	transition: all 0.3s ease;
 	border-radius: 10px;
 	text-decoration: none;
-}
-
-.navbar__item:hover {
-	color: white;
-	transition: all 0.3s ease;
-	border-radius: 10px;
-	text-decoration: none;
-	background-color: #0275d8;
+  background-color: #0275d8;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }

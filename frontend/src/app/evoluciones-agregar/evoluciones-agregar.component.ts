@@ -1,4 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { RestService } from '../rest.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-evoluciones-agregar',
@@ -7,9 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvolucionesAgregarComponent implements OnInit {
 
-  constructor() { }
+  public pokemon:any;
+  public pokemonId:string;
+  public form:FormGroup;
+
+  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.activatedRoute.paramMap.subscribe( (paramMap:any) => {
+      const {params} = paramMap;
+      this.obtenerEvolucion(params.id);
+      this.pokemonId = params.id;
+    });
+
+    this.form = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      nivelRequerido: ['', Validators.required],
+      imagen: ['']
+    });
+  }
+
+  public obtenerEvolucion(id:string) {
+    this.restService.get(`/api/pokemones/${id}/habilidades/agregar`).subscribe();
+  }
+
+  public agregarEvolucion() {
+    this.restService.post(`/api/pokemones/${this.pokemonId}/evoluciones/agregar`,
+    {
+      nombre: this.form.value.nombre,
+      descripcion: this.form.value.descripcion,
+      nivelRequerido: this.form.value.nivelRequerido,
+      imagen: this.form.value.image
+    }).subscribe();
+    window.location.href=`http://localhost:4200/pokemones`;
   }
 
 }

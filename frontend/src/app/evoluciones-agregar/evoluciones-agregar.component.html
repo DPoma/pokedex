@@ -1,18 +1,16 @@
 <app-pokedex-header></app-pokedex-header>
-<section class="section">
+<section class="container">
   <h1 class="title">AGREGAR EVOLUCION</h1>
-  <form class="form" th:object="${evolucion}" th:action="@{/pokemones/} + ${pokemon.id} + @{/evoluciones/agregar}"
-    method="POST">
+  <form class="form" [formGroup]="form" (submit)="agregarEvolucion()">
     <label class="title" for="nombre">Nombre</label>
-    <input class="input" name="nombre" type="text" th:text="${evolucion.nombre}" required>
+    <input class="input" formControlName="nombre" id="nombre" type="text">
     <label class="title" for="descripcion">Descripcion</label>
-    <input class="input" name="descripcion" type="text" th:text="${evolucion.descripcion}" required>
+    <input class="input" formControlName="descripcion" id="descripcion" type="text">
     <label class="title" for="nivelRequerido">Nivel Requerido</label>
-    <input class="input" name="nivelRequerido" type="number" min=1 max=1000 th:text="${evolucion.nivelRequerido}"
-      required>
+    <input class="input" formControlName="nivelRequerido" id="nivelRequerido" type="number" min=1 max=1000>
     <label class="title" for="imagen">URL Imagen (Opcional)</label>
-    <input class="input" name="imagen" type="text" th:text="${evolucion.imagen}">
-    <input class="button" type="submit" value="Guardar">
+    <input class="input" formControlName="imagen" id="imagen" type="text">
+    <button class="button" [disabled]="form.invalid">Guardar</button>
   </form>
 </section>
 <app-pokedex-logout></app-pokedex-logout>

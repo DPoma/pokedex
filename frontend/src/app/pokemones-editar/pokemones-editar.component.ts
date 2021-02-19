@@ -41,5 +41,6 @@ export class PokemonesEditarComponent implements OnInit {
       descripcion: this.form.value.descripcion,
       nivelRequerido: this.form.value.nivelRequerido
     }).subscribe();
+    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
   }
 }

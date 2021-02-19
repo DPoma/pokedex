@@ -37,5 +37,6 @@ export class TiposAgregarComponent implements OnInit {
     {
       id: this.form.value.tipoId
     }).subscribe();
+    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
   }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.certant.pokedex.model.Pokemon;
-
+import com.certant.pokedex.model.PokemonEvolucion;
 import com.certant.pokedex.service.PokemonService;
 
 @RestController
@@ -37,7 +37,7 @@ public class PokemonController {
 	
 	@GetMapping("/pokemones/{pokemonId}")
 	public Pokemon obtenerPokemon(@PathVariable int pokemonId) {
-		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
+		Pokemon pokemon = pokemonService.obtenerDetalles(pokemonId);
 		return pokemon;
 	}
 	
@@ -59,16 +59,17 @@ public class PokemonController {
 	}
 	
 	@GetMapping("/pokemones/{pokemonId}/evoluciones/agregar")
-	public List<Pokemon> agregarEvolucionGet(@PathVariable int pokemonId) {
-		return pokemonService.obtenerEvolucionesDisponibles();
+	public void agregarEvolucionGet() {
+		
 	}
 	
 	@PostMapping("/pokemones/{pokemonId}/evoluciones/agregar")
-	public Pokemon agregarEvolucionPost(@PathVariable int pokemonId, @RequestBody Pokemon evolucion) {
+	public Pokemon agregarEvolucionPost(@PathVariable int pokemonId, @RequestBody PokemonEvolucion evolucion) {
 		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
+		if(evolucion.getImagen() == null || evolucion.getImagen().trim().isEmpty())
+			evolucion.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png");
 		pokemon.agregarEvolucion(evolucion);	
 		pokemonService.guardar(pokemon);
 		return pokemon;
 	}
-
 }

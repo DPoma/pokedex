@@ -33,5 +33,6 @@ export class PokemonesAgregarComponent implements OnInit {
       nivelRequerido: this.form.value.nivelRequerido,
       imagen: this.form.value.image
     }).subscribe();
+    window.location.href=`http://localhost:4200/pokemones`;
   }
 }

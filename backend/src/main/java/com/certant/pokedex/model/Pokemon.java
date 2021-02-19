@@ -138,6 +138,10 @@ public class Pokemon implements Serializable{
 	public boolean esEvolucionDisponible() {
 		return false;
 	}
+		
+	public Pokemon obtenerDetalles() {
+		return null;
+	}
 
 	@Override
 	public int hashCode() {

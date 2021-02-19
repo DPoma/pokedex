@@ -1,5 +1,5 @@
 <app-pokedex-header></app-pokedex-header>
-<section class="section">
+<section class="container">
   <h1 class="title">AGREGAR POKEMON</h1>
   <form class="form" [formGroup]="form" (submit)="agregarPokemon()">
     <label class="title" for="nombre">Nombre</label>
@@ -10,7 +10,7 @@
     <input class="input" formControlName="nivelRequerido" id="nivelRequerido" type="number" min=1 max=1000>
     <label class="title" for="imagen">URL Imagen (Opcional)</label>
     <input class="input" formControlName="imagen" id="imagen" type="text">
-    <button class="button" [disabled]="form.invalid">Guardar Cmabios</button>
+    <button class="button" [disabled]="form.invalid">Guardar</button>
   </form>
 </section>
 <app-pokedex-logout></app-pokedex-logout>

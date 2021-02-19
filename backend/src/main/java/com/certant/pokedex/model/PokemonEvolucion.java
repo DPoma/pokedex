@@ -1,6 +1,7 @@
 package com.certant.pokedex.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -47,5 +48,14 @@ public class PokemonEvolucion extends Pokemon implements Serializable {
 	public void agregarEvolucion(Pokemon pokemon) {
 		((PokemonEvolucion)pokemon).setPokemonBase(this.pokemonBase);
 		this.pokemonBase.getEvoluciones().add((PokemonEvolucion)pokemon);
+	}
+	
+	public Pokemon obtenerDetalles() {
+		PokemonBase pokemon = new PokemonBase(this.getNombre(), this.getDescripcion(), this.getNivelRequerido(), this.getImagen());
+		this.getPokemonBase().agregarEvolucionBase();
+		pokemon.setHabilidades(this.getHabilidades());
+		pokemon.setTipos(this.getTipos());
+		pokemon.setEvoluciones(this.getPokemonBase().getEvoluciones());
+		return pokemon;
 	}
 }

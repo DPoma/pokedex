@@ -8,7 +8,7 @@
     <input class="input" formControlName="descripcion" id="descripcion" type="text" [(ngModel)]="pokemon.descripcion">
     <label class="title" for="nivelRequerido">Nivel Requerido</label>
     <input class="input" formControlName="nivelRequerido" id="nivelRequerido" type="number" min=1 max=1000 [(ngModel)]="pokemon.nivelRequerido">
-    <button class="button" [disabled]="form.invalid">Guardar Cmabios</button>
+    <button class="button" [disabled]="form.invalid">Guardar</button>
   </form>
 </section>
 <app-pokedex-logout></app-pokedex-logout>

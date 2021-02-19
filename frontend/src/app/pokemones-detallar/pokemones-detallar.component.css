@@ -9,6 +9,9 @@
 	font-family:'Montserrat', sans-serif;
 	font-size: 16px;
   text-align: center;
+  padding-bottom: 1em;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .title {
@@ -25,6 +28,7 @@
 
 .pokemon__img {
 	width: 25em;
+  margin: 3em 0;
 }
 
 .pokemon__info, .pokemon__skill, .pokemon__type, .pokemon__evolution {
@@ -34,6 +38,10 @@
 	background-color: #a4b0be;
 	width: 80%;
 	margin: 5em auto;
+}
+
+.pokemon__info {
+	margin-top: 0;
 }
 
 .pokemon__button-green {

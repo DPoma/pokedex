@@ -1,8 +1,5 @@
 package com.certant.pokedex.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +38,13 @@ public class PokemonService {
 	public List<Pokemon> obtenerEvolucionesDisponibles() {
 		return obtenerEvoluciones().stream().filter(evolucion -> evolucion.esEvolucionDisponible()).collect(Collectors.toList());		
 	}
+	
+	@Transactional(readOnly = true)
+	public Pokemon obtenerDetalles(int pokemonId) {
+		Pokemon pokemon = this.buscarPorId(pokemonId);
+		return pokemon.obtenerDetalles();
+		
+	}
 
 	@Transactional(readOnly = true)
 	public Pokemon buscarPorId(int id) {
@@ -62,17 +66,4 @@ public class PokemonService {
 		pokemonDAO.delete(pokemon);
 	}
 	
-	@SuppressWarnings("unchecked")	
-	public static List<Pokemon> obtenerEvolucionesOrdenadas(Pokemon pokemon) {
-		List<Pokemon> pokemones = new ArrayList<Pokemon>();		
-		List<Pokemon> evoluciones = ((List<Pokemon>)pokemon.obtenerEvoluciones());
-		if(pokemon instanceof PokemonBase)
-			pokemones.add(pokemon);
-		else
-			pokemones.add(((PokemonEvolucion)pokemon).getPokemonBase());
-		for(Pokemon evolucion : evoluciones)
-			pokemones.add(evolucion);
-		Collections.sort(pokemones, Comparator.comparing(Pokemon::getNivelRequerido));
-		return pokemones;
-	}
 }
