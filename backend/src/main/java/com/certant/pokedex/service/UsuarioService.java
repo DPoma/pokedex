@@ -15,19 +15,6 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-	/*
-	@Override
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioDAO.findByUsername(username);
-		if(usuario == null)
-			throw new UsernameNotFoundException(username);
-		ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return new User(usuario.getUsername(), usuario.getPassword(), roles);
-	}
-	*/
-	
 	@Transactional(readOnly = true)
 	public List<Usuario> obtenerTodos() {
 		return (List<Usuario>)usuarioDAO.findAll();
@@ -36,7 +23,6 @@ public class UsuarioService {
 	@Transactional
 	public void guardar(Usuario usuario) {
 		usuarioDAO.save(usuario);
-		
 	}
 
 	@Transactional
@@ -52,5 +38,10 @@ public class UsuarioService {
 	@Transactional(readOnly = true)
 	public Usuario buscarPorUsername(String username) {
 		return usuarioDAO.findByUsername(username);
+	}
+	
+	@Transactional(readOnly = true)
+	public boolean existePorUsername(String username) {
+		return usuarioDAO.existsByUsername(username);
 	}
 }

@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Login - Pokedex</title>
-	<meta charset="UTF-8">
-	<meta name="author" content="Dario Poma">
-	<meta name="keywords" content="Pokedex, Certant, Pokemon">
-	<meta name="description" content="Pokedex">
-	<meta name="copyright" content="Certant">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" th:href="@{/css/style.css}">
-	<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-</head>
-<body class="body">
-	<header th:replace="layout :: header"></header>
-	<form class="form" th:action="@{/login}" method="POST">
-		<label class="title" for="username">Usuario</label>
-		<input class="input" type="text" name="username" id="username" required autofocus>
-		<label class="title" for="password">Contrasena</label>
-		<input class="input" type="password" name="password" id="password" required>
-		<input class="button" type="submit" value="Iniciar Sesión">
-		<a class="signup" th:href="@{/registro}">Registrarse</a>
-	</form>
-	<footer th:replace="layout :: footer"></footer>
-</body>
-</html>
+<app-pokedex-header></app-pokedex-header>
+<section class="container">
+  <form class="form" [formGroup]="form" (submit)="iniciarSesion()">
+    <label class="error" [hidden]="!error">ERROR USUARIO O CONTRASENA INVALIDA</label>
+    <label class="title" for="usuario">Usuario</label>
+    <input class="input" formControlName="usuario" id="usuario" type="text">
+    <label class="title" for="contrasena">Contrasena</label>
+    <input class="input" formControlName="contrasena" id="contrasena" type="text">
+    <button class="button" [disabled]="form.invalid">INICIAR SESIÓN</button>
+    <label class="registro" [routerLink]="['/','registro']">Registrarse</label>
+  </form>
+</section>
+<app-pokedex-footer></app-pokedex-footer>

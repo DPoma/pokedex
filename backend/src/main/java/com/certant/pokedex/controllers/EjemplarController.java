@@ -3,7 +3,6 @@ package com.certant.pokedex.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,16 +28,15 @@ public class EjemplarController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@GetMapping("/ejemplares")
-	public List<Ejemplar> ejemplares(Model model) {
-		//String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario usuario = usuarioService.buscarPorUsername("user");
+	@PostMapping("/ejemplares")
+	public List<Ejemplar> ejemplares(@RequestBody Ejemplar ejemplar) {
+		Usuario usuario = usuarioService.buscarPorId(ejemplar.getUsuario().getId());
 		return ejemplarService.obtenerDeUsuario(usuario);
 	}
 	
 	@GetMapping("/ejemplares/agregar")
-	public List<Pokemon> agregarEjemplarGet() {
-		return pokemonService.obtenerTodos();
+	public List<Ejemplar> agregarEjemplarGet() {
+		return ejemplarService.obtenerTodos();
 	}
 		
 	@PostMapping("/ejemplares/agregar")
