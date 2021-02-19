@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.certant.pokedex.model.Ejemplar;
@@ -29,23 +28,23 @@ public class EjemplarController {
 	private UsuarioService usuarioService;
 
 	@PostMapping("/ejemplares")
-	public List<Ejemplar> ejemplares(@RequestBody Ejemplar ejemplar) {
+	public List<Ejemplar> obtenerEjemplaresPost(@RequestBody Ejemplar ejemplar) {
 		Usuario usuario = usuarioService.buscarPorId(ejemplar.getUsuario().getId());
 		return ejemplarService.obtenerDeUsuario(usuario);
 	}
 	
 	@GetMapping("/ejemplares/agregar")
-	public List<Ejemplar> agregarEjemplarGet() {
-		return ejemplarService.obtenerTodos();
+	public List<Pokemon> agregarEjemplarGet() {
+		return pokemonService.obtenerTodos();
 	}
 		
 	@PostMapping("/ejemplares/agregar")
-	public Ejemplar agregarEjemplar(@RequestParam int pokemonId, @RequestBody Ejemplar ejemplar) {
-		Pokemon pokemon = pokemonService.buscarPorId(pokemonId);
-		Usuario usuario = usuarioService.buscarPorUsername("user");
+	public Ejemplar agregarEjemplarPost(@RequestBody Ejemplar ejemplar) {
+		Pokemon pokemon = pokemonService.buscarPorId(ejemplar.getPokemon().getId());
+		Usuario usuario = usuarioService.buscarPorId(ejemplar.getUsuario().getId());
 		ejemplar.setPokemon(pokemon);
 		ejemplar.setUsuario(usuario);
+		ejemplarService.guardar(ejemplar);
 		return ejemplar;
 	}
-	
 }

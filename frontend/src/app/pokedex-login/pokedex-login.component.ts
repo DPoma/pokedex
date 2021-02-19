@@ -33,7 +33,8 @@ export class PokedexLoginComponent implements OnInit {
       this.usuario = respuesta;
       if(this.usuario != null) {
         localStorage.setItem('usuarioId', this.usuario.id);
-        window.location.href=`http://localhost:4200/pokemones`;
+        localStorage.setItem('usuario', this.usuario.username);
+        window.location.href=`http://localhost:4200`;
       } else {
         this.error = true;
       }

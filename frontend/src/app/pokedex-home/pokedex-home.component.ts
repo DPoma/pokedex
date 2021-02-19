@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexHomeComponent implements OnInit {
 
+  public usuario:string;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.usuario = localStorage.getItem('usuario');
   }
 
 }

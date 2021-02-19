@@ -1,4 +1,5 @@
-<section class="section">
+<app-pokedex-header></app-pokedex-header>
+<section class="container">
   <h1 class="title">POKEMONES CAPTURADOS</h1>
   <table class="ejemplar__table">
     <tr class="ejemplar__tr">
@@ -18,7 +19,7 @@
       </td>
     </tr>
   </table>
-  <a th:href="@{/ejemplares/agregar}">
-    <input class="button" type="button" value="Agregar Ejemplar">
-  </a>
+  <button class="button" [routerLink]="['/','ejemplares','agregar']">Agregar Ejemplar</button>
 </section>
+<app-pokedex-logout></app-pokedex-logout>
+<app-pokedex-footer></app-pokedex-footer>
