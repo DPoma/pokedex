@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokedex-login',
@@ -13,7 +14,7 @@ export class PokedexLoginComponent implements OnInit {
   public error:boolean;
   public form:FormGroup;
 
-  constructor(private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -23,6 +24,16 @@ export class PokedexLoginComponent implements OnInit {
     });
   }
 
+  public iniciarSesion() {
+    let resp = this.restService.login(this.form.value.usuario, this.form.value.contrasena);
+    console.log(this.form.value.usuario);
+    console.log(this.form.value.contrasena);
+    resp.subscribe(data => {
+     console.log(data);
+     //this.router.navigate(["/pokemones"]);
+    });
+  }
+/*
   public iniciarSesion() {
     this.restService.post(`/api/login`,
     {
@@ -40,4 +51,5 @@ export class PokedexLoginComponent implements OnInit {
       }
     });
   }
+*/
 }

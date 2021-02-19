@@ -17,6 +17,9 @@ import { PokemonesDetallarComponent } from './pokemones-detallar/pokemones-detal
 
 const routes: Routes = [
   {
+    path:"",redirectTo:"login",pathMatch:"full"
+  },
+  {
     path:'',
     component:PokedexHomeComponent
   },

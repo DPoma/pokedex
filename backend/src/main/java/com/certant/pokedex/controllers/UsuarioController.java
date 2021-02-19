@@ -3,6 +3,7 @@ package com.certant.pokedex.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,12 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@GetMapping("/login")
+	public String login() {
+		return "EXITO";
+	}
+	
+	/*
 	@PostMapping("/login")
 	public Usuario login(@RequestBody Usuario usuarioJSON) {
 		Usuario usuario = usuarioService.buscarPorUsername(usuarioJSON.getUsername());
@@ -28,6 +35,7 @@ public class UsuarioController {
 		}
 		return null;
 	}
+	*/
 	
 	@PostMapping("/registro")
 	public Usuario registro(@RequestBody Usuario usuario) {
