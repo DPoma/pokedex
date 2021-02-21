@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-pokedex-login',
@@ -10,11 +11,10 @@ import { Router } from '@angular/router';
 })
 export class PokedexLoginComponent implements OnInit {
 
-  public usuario:any;
-  public error:boolean;
-  public form:FormGroup;
+  public mensajeError: boolean;
+  public form: FormGroup;
 
-  constructor(private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
+  constructor(private restService: RestService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -25,31 +25,16 @@ export class PokedexLoginComponent implements OnInit {
   }
 
   public iniciarSesion() {
-    let resp = this.restService.login(this.form.value.usuario, this.form.value.contrasena);
-    console.log(this.form.value.usuario);
-    console.log(this.form.value.contrasena);
-    resp.subscribe(data => {
-     console.log(data);
-     //this.router.navigate(["/pokemones"]);
-    });
+    let usuario:string = this.form.value.usuario;
+    let contrasena:string = this.form.value.contrasena;
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(usuario + ':' + contrasena) });
+    return this.restService.get(`/api/login`, { headers, responseType: 'text' as 'json'})
+    .subscribe(
+    response => {
+      this.mensajeError = false;
+      localStorage.setItem('usuario', usuario);
+      this.router.navigate(['/']);
+    },
+    error => {this.mensajeError = true;});
   }
-/*
-  public iniciarSesion() {
-    this.restService.post(`/api/login`,
-    {
-      username: this.form.value.usuario,
-      password: this.form.value.contrasena,
-    }).subscribe(
-      respuesta => {
-      this.usuario = respuesta;
-      if(this.usuario != null) {
-        localStorage.setItem('usuarioId', this.usuario.id);
-        localStorage.setItem('usuario', this.usuario.username);
-        window.location.href=`http://localhost:4200`;
-      } else {
-        this.error = true;
-      }
-    });
-  }
-*/
 }

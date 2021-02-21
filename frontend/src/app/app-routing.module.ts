@@ -14,71 +14,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PokemonesAgregarComponent } from './pokemones-agregar/pokemones-agregar.component';
 import { PokemonesDetallarComponent } from './pokemones-detallar/pokemones-detallar.component';
+import { AuthGuardService } from './auth.service';
 
 const routes: Routes = [
-  {
-    path:"",redirectTo:"login",pathMatch:"full"
-  },
-  {
-    path:'',
-    component:PokedexHomeComponent
-  },
-  {
-    path:'login',
-    component:PokedexLoginComponent
-  },
-  {
-    path:'registro',
-    component:PokedexRegistroComponent
-  },
-  {
-    path:'pokemones',
-    component:PokemonesListarComponent
-  },
-  {
-    path:'pokemones/agregar',
-    component:PokemonesAgregarComponent
-  },
-  {
-    path:'pokemones/:id',
-    component:PokemonesDetallarComponent
-  },
-  {
-    path:'pokemones/:id/editar',
-    component:PokemonesEditarComponent
-  },
-  {
-    path:'pokemones/:id/habilidades/agregar',
-    component:HabilidadesAgregarComponent
-  },
-  {
-    path:'pokemones/:id/habilidades/eliminar',
-    component:HabilidadesEliminarComponent
-  },
-  {
-    path:'pokemones/:id/tipos/agregar',
-    component:TiposAgregarComponent
-  },
-  {
-    path:'pokemones/:id/tipos/eliminar',
-    component:TiposEliminarComponent
-  },
-  {
-    path:'pokemones/:id/evoluciones/agregar',
-    component:EvolucionesAgregarComponent
-  },
-  {
-    path:'ejemplares',
-    component:EjemplaresListarComponent
-  },
-  {
-    path:'ejemplares/agregar',
-    component:EjemplaresAgregarComponent
-  }
+  { path: 'login', component: PokedexLoginComponent },
+  { path: 'registro', component: PokedexRegistroComponent },
+  { path: '', component: PokedexHomeComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones', component: PokemonesListarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/agregar', component: PokemonesAgregarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id', component: PokemonesDetallarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/editar', component: PokemonesEditarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/habilidades/agregar', component: HabilidadesAgregarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/habilidades/eliminar', component: HabilidadesEliminarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/tipos/agregar', component: TiposAgregarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/tipos/eliminar', component: TiposEliminarComponent, canActivate: [AuthGuardService] },
+  { path: 'pokemones/:id/evoluciones/agregar', component: EvolucionesAgregarComponent, canActivate: [AuthGuardService] },
+  { path: 'ejemplares', component: EjemplaresListarComponent, canActivate: [AuthGuardService] },
+  { path: 'ejemplares/agregar', component: EjemplaresAgregarComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

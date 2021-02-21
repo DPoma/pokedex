@@ -1,7 +1,7 @@
 <app-pokedex-header></app-pokedex-header>
 <section class="container">
   <form class="form" [formGroup]="form" (submit)="iniciarSesion()">
-    <label class="error" [hidden]="!error">ERROR USUARIO O CONTRASENA INVALIDA</label>
+    <label class="error" *ngIf="mensajeError">ERROR USUARIO O CONTRASENA INVALIDA</label>
     <label class="title" for="usuario">Usuario</label>
     <input class="input" formControlName="usuario" id="usuario" type="text">
     <label class="title" for="contrasena">Contrasena</label>

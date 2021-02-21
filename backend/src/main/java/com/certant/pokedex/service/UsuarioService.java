@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,7 +53,12 @@ public class UsuarioService implements UserDetailsService {
 		return usuarioDAO.existsByUsername(username);
 	}
 	
-
+	@Transactional(readOnly = true)
+	public Usuario obtenerUsuario() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		return this.buscarPorUsername(username);
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,5 +69,4 @@ public class UsuarioService implements UserDetailsService {
 		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return new User(usuario.getUsername(), usuario.getPassword(), roles);
 	}
-	
 }

@@ -16,6 +16,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -25,13 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().disable();
-		http.csrf().disable();
-		  http.authorizeRequests().antMatchers("/**").fullyAuthenticated().and
-		 ().httpBasic(); 
+		http.csrf().disable();	    
+		http.authorizeRequests()
+	          .antMatchers("/api/login", "/api/registro")
+	          .permitAll() .anyRequest()
+	          .authenticated()
+	          .and()
+	          .httpBasic().authenticationEntryPoint(authenticationEntryPoint);
 	}
     
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
     	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }

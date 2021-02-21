@@ -18,17 +18,7 @@ export class EjemplaresListarComponent implements OnInit {
   }
 
   public obtenerEjemplares() {
-    this.restService.post(`/api/ejemplares`,
-    {
-      id: null,
-      pokemon: {
-          id: null
-      },
-      usuario: {
-          id: localStorage.getItem('usuarioId')
-      },
-      nivelActual: null
-  }).subscribe(
+    this.restService.get(`/api/ejemplares`).subscribe(
       respuesta => {
       this.ejemplares = respuesta;
     });

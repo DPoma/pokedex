@@ -34,9 +34,6 @@ export class EjemplaresAgregarComponent implements OnInit {
       pokemon: {
           id: this.form.value.pokemonId
       },
-      usuario: {
-          id: localStorage.getItem('usuarioId')
-      },
       nivelActual: this.form.value.nivelActual
   }).subscribe();
   window.location.href=`http://localhost:4200/ejemplares`;
