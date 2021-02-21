@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.certant.pokedex.handlers.FileHandler;
+import com.certant.pokedex.handlers.FileConfig;
 import com.certant.pokedex.model.Habilidad;
 import com.certant.pokedex.model.Pokemon;
 import com.certant.pokedex.model.Tipo;

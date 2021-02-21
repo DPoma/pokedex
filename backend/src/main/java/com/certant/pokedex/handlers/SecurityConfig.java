@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     
     @Autowired
-    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+    private AuthenticationConfig authenticationEntryPoint;
 
 
     @Bean

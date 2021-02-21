@@ -1,6 +1,7 @@
 package com.certant.pokedex.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,14 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/login" )
+	@GetMapping("/login")
 	public boolean loginUsuario() {
+		return true;
+	}
+	
+	@PostMapping("/logout")
+	public boolean logout() {
+		SecurityContextHolder.clearContext();
 		return true;
 	}
 	

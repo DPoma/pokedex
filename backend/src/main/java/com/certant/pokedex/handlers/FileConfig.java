@@ -18,7 +18,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
-public class FileHandler {
+public class FileConfig {
 	
 	private static List<Pokemon> pokemones = new ArrayList<Pokemon>();
 	private static List<Habilidad> habilidades = new ArrayList<Habilidad>();

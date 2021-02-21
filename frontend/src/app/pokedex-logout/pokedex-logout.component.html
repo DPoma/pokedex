@@ -1,5 +1,3 @@
-<form class="form" method="POST">
-  <a href="#" onclick="this.parentNode.submit();">
-    <input class="button__logout" type="button" value="CERRAR SESIÓN">
-  </a>
+<form class="form" [formGroup]="form" (submit)="cerrarSesion()">
+  <button class="button__logout">CERRAR SESIÓN</button>
 </form>
