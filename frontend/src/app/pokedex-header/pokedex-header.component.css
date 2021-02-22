@@ -12,6 +12,7 @@
 .header__logo {
 	width: 40em;
 	margin: 3em 0;
+  cursor: pointer;
 }
 
 .navbar {

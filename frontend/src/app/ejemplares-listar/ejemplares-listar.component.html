@@ -6,6 +6,9 @@
     <table class="ejemplar__table">
       <tr class="ejemplar__tr">
         <th class="ejemplar__th">
+          <h2>Imagen</h2>
+        </th>
+        <th class="ejemplar__th">
           <h2>Pokemon</h2>
         </th>
         <th class="ejemplar__th">
@@ -13,6 +16,9 @@
         </th>
       </tr>
       <tr *ngFor="let ejemplar of ejemplares">
+        <td>
+          <img class="ejemplar__img" [src]="ejemplar.pokemon.imagen">
+        </td>
         <td>
           <h2>{{ejemplar.pokemon.nombre}}</h2>
         </td>

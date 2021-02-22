@@ -32,7 +32,7 @@ export class PokemonesAgregarComponent implements OnInit {
       nombre: this.form.value.nombre,
       descripcion: this.form.value.descripcion,
       nivelRequerido: this.form.value.nivelRequerido,
-      imagen: this.form.value.image
+      imagen: this.form.value.imagen
     }).subscribe( response => {
       this.router.navigate(['/pokemones']);
     });

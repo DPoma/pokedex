@@ -42,7 +42,7 @@ export class EvolucionesAgregarComponent implements OnInit {
       nombre: this.form.value.nombre,
       descripcion: this.form.value.descripcion,
       nivelRequerido: this.form.value.nivelRequerido,
-      imagen: this.form.value.image
+      imagen: this.form.value.imagen
     }).subscribe(() => this.router.navigate(['/', 'pokemones', this.pokemonId]));
   }
 }

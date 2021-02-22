@@ -1,11 +1,12 @@
-<app-pokedex-header></app-pokedex-header>
+<app-pokedex-logo></app-pokedex-logo>
 <section class="container">
+  <h1 class="title">INICIAR SESION</h1>
   <form class="form" [formGroup]="form" (submit)="iniciarSesion()">
-    <label class="error" *ngIf="mensajeError">ERROR USUARIO O CONTRASENA INVALIDA</label>
+    <label class="error" *ngIf="mensajeError">Usuario o contrasena invalida</label>
     <label class="title" for="usuario">Usuario</label>
     <input class="input" formControlName="usuario" id="usuario" type="text">
     <label class="title" for="contrasena">Contrasena</label>
-    <input class="input" formControlName="contrasena" id="contrasena" type="text">
+    <input class="input" formControlName="contrasena" id="contrasena" type="password">
     <button class="button" [disabled]="form.invalid">INICIAR SESIÓN</button>
     <label class="registro" [routerLink]="['/','registro']">Registrarse</label>
   </form>
