@@ -1,25 +1,28 @@
 <app-pokedex-header></app-pokedex-header>
 <section class="container">
   <h1 class="title">POKEMONES CAPTURADOS</h1>
-  <table class="ejemplar__table">
-    <tr class="ejemplar__tr">
-      <th class="ejemplar__th">
-        <h2>Pokemon</h2>
-      </th>
-      <th class="ejemplar__th">
-        <h2>Nivel Actual</h2>
-      </th>
-    </tr>
-    <tr *ngFor="let ejemplar of ejemplares">
-      <td>
-        <h2>{{ejemplar.pokemon.nombre}}</h2>
-      </td>
-      <td>
-        <h2>{{ejemplar.nivelActual}}</h2>
-      </td>
-    </tr>
-  </table>
-  <button class="button" [routerLink]="['/','ejemplares','agregar']">Agregar Ejemplar</button>
+  <app-pokedex-spinner *ngIf="!dataCargada"></app-pokedex-spinner>
+  <section class="container" *ngIf="dataCargada">
+    <table class="ejemplar__table">
+      <tr class="ejemplar__tr">
+        <th class="ejemplar__th">
+          <h2>Pokemon</h2>
+        </th>
+        <th class="ejemplar__th">
+          <h2>Nivel Actual</h2>
+        </th>
+      </tr>
+      <tr *ngFor="let ejemplar of ejemplares">
+        <td>
+          <h2>{{ejemplar.pokemon.nombre}}</h2>
+        </td>
+        <td>
+          <h2>{{ejemplar.nivelActual}}</h2>
+        </td>
+      </tr>
+    </table>
+    <button class="button" [routerLink]="['/','ejemplares','agregar']">Agregar Ejemplar</button>
+  </section>
 </section>
 <app-pokedex-logout></app-pokedex-logout>
 <app-pokedex-footer></app-pokedex-footer>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class PokemonesAgregarComponent implements OnInit {
   public pokemonId:string;
   public form:FormGroup;
 
-  constructor(private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -32,7 +33,8 @@ export class PokemonesAgregarComponent implements OnInit {
       descripcion: this.form.value.descripcion,
       nivelRequerido: this.form.value.nivelRequerido,
       imagen: this.form.value.image
-    }).subscribe();
-    window.location.href=`http://localhost:4200/pokemones`;
+    }).subscribe( response => {
+      this.router.navigate(['/pokemones']);
+    });
   }
 }

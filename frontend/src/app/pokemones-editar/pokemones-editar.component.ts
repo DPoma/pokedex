@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,24 +14,30 @@ export class PokemonesEditarComponent implements OnInit {
   public pokemonId:string;
   public form:FormGroup;
 
-  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe( (paramMap:any) => {
       const {params} = paramMap;
       this.obtenerPokemon(params.id);
       this.pokemonId = params.id;
-    })
+    });
 
-    this.form = this.formBuilder.group({
+      this.form = this.formBuilder.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      nivelRequerido: ['', Validators.required]
-    });
+      nivelRequerido: ['', Validators.required],
+      });
   }
 
   public obtenerPokemon(id:string) {
-    this.restService.get(`/api/pokemones/${id}/editar`).subscribe(respuesta => this.pokemon = respuesta);
+    this.restService.get(`/api/pokemones/${id}/editar`).subscribe(respuesta => {
+      this.pokemon = respuesta;
+      this.form.setValue({
+        nombre: this.pokemon.nombre,
+        descripcion: this.pokemon.descripcion,
+        nivelRequerido: this.pokemon.nivelRequerido});
+    });
   }
 
   public editarPokemon() {
@@ -40,7 +46,8 @@ export class PokemonesEditarComponent implements OnInit {
       nombre: this.form.value.nombre,
       descripcion: this.form.value.descripcion,
       nivelRequerido: this.form.value.nivelRequerido
-    }).subscribe();
-    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
+    }).subscribe(response => {
+      this.router.navigate(['/', 'pokemones', this.pokemonId]);
+    });
   }
 }

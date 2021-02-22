@@ -1,12 +1,15 @@
 <app-pokedex-header></app-pokedex-header>
 <section class="container">
   <h1 class="title">Pokemones</h1>
-  <section class="pokemones">
-    <div class="pokemones__box" *ngFor="let pokemon of pokemones">
-      <img class="pokemones__box-img" [src]="pokemon?.imagen">
-      <h2 class="pokemones__box-name">{{pokemon.nombre}}</h2>
-      <input class="pokemones__box-btn" [routerLink]="['/','pokemones',pokemon?.id]" type="button" value="Detalles">
-    </div>
+  <app-pokedex-spinner *ngIf="!dataCargada"></app-pokedex-spinner>
+  <section class="container" *ngIf="dataCargada">
+    <section class="pokemones">
+      <div class="pokemones__box" *ngFor="let pokemon of pokemones">
+        <img class="pokemones__box-img" [src]="pokemon?.imagen">
+        <h2 class="pokemones__box-name">{{pokemon.nombre}}</h2>
+        <input class="pokemones__box-btn" [routerLink]="['/','pokemones',pokemon?.id]" type="button" value="Detalles">
+      </div>
+    </section>
   </section>
 </section>
 <app-pokedex-logout></app-pokedex-logout>

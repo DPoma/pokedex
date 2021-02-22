@@ -22,6 +22,7 @@ import { PokedexLogoutComponent } from './pokedex-logout/pokedex-logout.componen
 import { PokedexRegistroComponent } from './pokedex-registro/pokedex-registro.component';
 import { PokemonesDetallarComponent } from './pokemones-detallar/pokemones-detallar.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PokedexSpinnerComponent } from './pokedex-spinner/pokedex-spinner.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PokedexLoginComponent,
     PokedexLogoutComponent,
     PokedexRegistroComponent,
-    PokemonesDetallarComponent
+    PokemonesDetallarComponent,
+    PokedexSpinnerComponent
   ],
   imports: [
     BrowserModule,

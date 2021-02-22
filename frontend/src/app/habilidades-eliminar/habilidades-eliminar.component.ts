@@ -1,5 +1,5 @@
 import { RestService } from './../rest.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,7 +14,7 @@ export class HabilidadesEliminarComponent implements OnInit {
   public pokemonId:string;
   public form:FormGroup;
 
-  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe( (paramMap:any) => {
@@ -36,8 +36,6 @@ export class HabilidadesEliminarComponent implements OnInit {
     this.restService.post(`/api/pokemones/${this.pokemonId}/habilidades/eliminar`,
     {
       id: this.form.value.habilidadId
-    }).subscribe();
-    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
+    }).subscribe(() => this.router.navigate(['/', 'pokemones', this.pokemonId]));
   }
-
 }

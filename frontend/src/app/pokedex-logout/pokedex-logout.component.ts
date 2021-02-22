@@ -20,9 +20,10 @@ export class PokedexLogoutComponent implements OnInit {
   }
 
   public cerrarSesion() {
-    this.restService.post('/api/logout', {}).subscribe();
-    this.router.navigate(['/login']);
-    localStorage.removeItem('usuario');
+    this.restService.post('/api/logout', {}).subscribe(
+      response => {
+      this.router.navigate(['/login']);
+      localStorage.removeItem('usuario');
+    });
   }
-
 }

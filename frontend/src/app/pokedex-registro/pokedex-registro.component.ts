@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class PokedexRegistroComponent implements OnInit {
   public error:boolean;
   public form:FormGroup;
 
-  constructor(private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -30,7 +31,7 @@ export class PokedexRegistroComponent implements OnInit {
     }).subscribe(respuesta => {
       this.usuario = respuesta;
       if(this.usuario != null) {
-        window.location.href=`http://localhost:4200/login`;
+        this.router.navigate(['/login']);
       } else {
         this.error = true;
       }

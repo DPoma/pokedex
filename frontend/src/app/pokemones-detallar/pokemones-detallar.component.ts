@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PokemonesDetallarComponent implements OnInit {
 
   public pokemon:any;
+  public dataCargada:boolean;
 
   constructor(private activatedRoute:ActivatedRoute, private restService:RestService) { }
 
@@ -21,7 +22,10 @@ export class PokemonesDetallarComponent implements OnInit {
   }
 
   public obtenerPokemon(id:string) {
-    this.restService.get(`/api/pokemones/${id}`).subscribe(respuesta => this.pokemon = respuesta);
+    this.restService.get(`/api/pokemones/${id}`).subscribe(respuesta => {
+      this.pokemon = respuesta;
+      this.dataCargada=true;
+    });
   }
 
 }

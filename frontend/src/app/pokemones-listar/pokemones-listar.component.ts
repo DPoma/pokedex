@@ -9,6 +9,7 @@ import { RestService } from '../rest.service';
 export class PokemonesListarComponent implements OnInit {
 
   public pokemones:any = [];
+  public dataCargada:boolean;
 
   constructor(private restService:RestService) {}
 
@@ -17,6 +18,9 @@ export class PokemonesListarComponent implements OnInit {
   }
 
   public obtenerPokemones() {
-    this.restService.get(`/api/pokemones`).subscribe(respuesta => this.pokemones = respuesta);
+    this.restService.get(`/api/pokemones`).subscribe(respuesta => {
+      this.pokemones = respuesta;
+      this.dataCargada = true;
+    });
   }
 }

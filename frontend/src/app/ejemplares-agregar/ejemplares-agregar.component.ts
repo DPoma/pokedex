@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +13,7 @@ export class EjemplaresAgregarComponent implements OnInit {
   public pokemones:any = [];
   public form:FormGroup;
 
-  constructor(private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -35,7 +36,6 @@ export class EjemplaresAgregarComponent implements OnInit {
           id: this.form.value.pokemonId
       },
       nivelActual: this.form.value.nivelActual
-  }).subscribe();
-  window.location.href=`http://localhost:4200/ejemplares`;
+    }).subscribe(() => this.router.navigate(['/', 'ejemplares']));
   }
 }

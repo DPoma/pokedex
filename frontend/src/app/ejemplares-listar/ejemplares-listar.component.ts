@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EjemplaresListarComponent implements OnInit {
 
   public ejemplares:any = [];
+  public dataCargada:boolean;
 
   constructor(private restService:RestService, private formBuilder:FormBuilder) { }
 
@@ -21,6 +22,7 @@ export class EjemplaresListarComponent implements OnInit {
     this.restService.get(`/api/ejemplares`).subscribe(
       respuesta => {
       this.ejemplares = respuesta;
+      this.dataCargada = true;
     });
   }
 }

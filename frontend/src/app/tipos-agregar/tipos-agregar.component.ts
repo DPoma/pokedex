@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ export class TiposAgregarComponent implements OnInit {
   public pokemonId:string;
   public form:FormGroup;
 
-  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder) { }
+  constructor(private activatedRoute:ActivatedRoute, private restService:RestService, private formBuilder:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe( (paramMap:any) => {
@@ -36,7 +36,8 @@ export class TiposAgregarComponent implements OnInit {
     this.restService.post(`/api/pokemones/${this.pokemonId}/tipos/agregar`,
     {
       id: this.form.value.tipoId
-    }).subscribe();
-    window.location.href=`http://localhost:4200/pokemones/${this.pokemonId}`;
+    }).subscribe(response => {
+      this.router.navigate(['/', 'pokemones', this.pokemonId])
+    });
   }
 }

@@ -3,11 +3,11 @@
   <h1 class="title">EDITAR DATOS</h1>
   <form class="form" [formGroup]="form" (submit)="editarPokemon()">
     <label class="title" for="nombre">Nombre</label>
-    <input class="input" formControlName="nombre" id="nombre" type="text" [(ngModel)]="pokemon.nombre">
+    <input class="input" formControlName="nombre" id="nombre" type="text">
     <label class="title" for="descripcion">Descripcion</label>
-    <input class="input" formControlName="descripcion" id="descripcion" type="text" [(ngModel)]="pokemon.descripcion">
+    <input class="input" formControlName="descripcion" id="descripcion" type="text" >
     <label class="title" for="nivelRequerido">Nivel Requerido</label>
-    <input class="input" formControlName="nivelRequerido" id="nivelRequerido" type="number" min=1 max=1000 [(ngModel)]="pokemon.nivelRequerido">
+    <input class="input" formControlName="nivelRequerido" id="nivelRequerido" type="number" min=1 max=1000 >
     <button class="button" [disabled]="form.invalid">Guardar</button>
   </form>
 </section>
