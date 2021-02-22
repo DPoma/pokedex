@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.certant.pokedex.model.Pokemon;
+import com.certant.pokedex.model.PokemonBase;
 import com.certant.pokedex.model.PokemonEvolucion;
 import com.certant.pokedex.service.PokemonService;
 
@@ -28,7 +29,7 @@ public class PokemonController {
 	}
 	
 	@PostMapping("/pokemones/agregar")
-	public Pokemon agregarPokemon(@RequestBody Pokemon pokemon) {
+	public Pokemon agregarPokemon(@RequestBody PokemonBase pokemon) {
 		if(pokemon.getImagen() == null || pokemon.getImagen().trim().isEmpty())
 			pokemon.setImagen("https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png");
 		pokemonService.guardar(pokemon);

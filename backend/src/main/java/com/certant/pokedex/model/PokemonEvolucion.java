@@ -52,9 +52,10 @@ public class PokemonEvolucion extends Pokemon implements Serializable {
 	
 	public Pokemon obtenerDetalles() {
 		PokemonBase pokemon = new PokemonBase(this.getNombre(), this.getDescripcion(), this.getNivelRequerido(), this.getImagen());
-		this.getPokemonBase().agregarEvolucionBase();
+		pokemon.setId(this.getId());
 		pokemon.setHabilidades(this.getHabilidades());
 		pokemon.setTipos(this.getTipos());
+		this.getPokemonBase().agregarEvolucionBase();
 		pokemon.setEvoluciones(this.getPokemonBase().getEvoluciones());
 		return pokemon;
 	}
